@@ -56,6 +56,10 @@ class ConvertTcl2Py():
         return self.node_lines
 
     def fix(self):
+        # TODO Arguments Split with something else than tab.
+        # labels: todo, enhancement
+        # assignees: iammix
+
         lines = self._get_fix_lines()
         node_tag = []
         x_fix = []
