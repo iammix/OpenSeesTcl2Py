@@ -59,8 +59,6 @@ class ConvertTcl2Py():
         # TODO Arguments Split with something else than tab.
         # labels: todo, enhancement
         # assignees: iammix
-
-        lines = self._get_fix_lines()
         node_tag = []
         x_fix = []
         y_fix = []
@@ -102,14 +100,58 @@ class ConvertTcl2Py():
         tclFile.close()
         return fix_lines
 
+    def mass(self):
+        # TODO Mass arguments split with space not tab
+        # labels: todo, enhancement
+        # assignees: iammix
+
+        lines = self._get_mass_lines()
+        node_tag = []
+        x_mass = []
+        y_mass = []
+        z_mass = []
+        xr_mass = []
+        yr_mass = []
+        zr_mass = []
+
+        for line in lines:
+            if line.endswith('\n'):
+                line = line[:-1]
+            if line.endswith(';'):
+                line = line[:-1]
+            line_list = line.split('\t')
+            if len(line_list) > 1:
+                node_tag.append(int(line_list[1]))
+                x_mass.append(float(line_list[2]))
+                y_mass.append(float(line_list[3]))
+                z_mass.append(float(line_list[4]))
+                xr_mass.append(float(line_list[5]))
+                yr_mass.append(float(line_list[6]))
+                zr_mass.append(float(line_list[7]))
+            else:
+                pass
+        self.mass_lines = []
+        for i in range(len(node_tag)):
+            self.mass_lines.append(
+                f"ops.mass({node_tag[i]}, {x_mass[i]}, {y_mass[i]}, {z_mass[i]}, {xr_mass[i]}, {yr_mass[i]}, {zr_mass[i]})")
+        return self.mass_lines
+
+    def _get_mass_lines(self) -> list:
+        mass_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('mass'):
+                    mass_lines.append(line)
+        tclFile.close()
+        return mass_lines
 
 if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "Fix.tcl")
+    tclFileName = os.path.join(project_path, "Mass.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.fix()
+    lines = convert.mass()
     with open('python.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
     pythonFile.close()
-
