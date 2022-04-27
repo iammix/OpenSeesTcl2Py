@@ -13,25 +13,41 @@ class ConvertTcl2Py():
             tclLines = tclFile.readlines()
         tclFile.close()
         return tclLines
+    
+    def _get_node_lines(self)->str:
+        node_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('node'):
+                    node_lines.append(line)
+        tclFile.close()
+        return node_lines
+
 
     def tcl2py(self):
         with open(self.tclFilename, 'r') as tclFile:
             tclLines = tclFile.readlines()
     
-    def node_convert(self):
-        lines = self._get_lines()
+    def node(self):
+        lines = self._get_node_lines()
+        node_tag = []
+        x = []
+        y = []
+        z = []
         for line in lines:
-            if line.startswith('node'):
-                line = self._convert_tabs_to_commas(line)
-                line = self._convert_nodeComma_to_nodeParenthesis(line)
-                print(line)
+            line_list = line.split('\t')
+            if len(line_list) > 1:
+                node_tag.append(line_list[0])
+                x.append(line_list[1])
+                y.append(line_list[2])
+                z.append(line_list[3])
+            else:
+                # TODO In case the separation is not tab but something else
+                # labels: todo, enhancement
+                pass
+        print(node_tag, x, y, z)
 
-
-    def _convert_tabs_to_commas(self, string:str)->str:
-        return string.replace('\t', ', ')
-    
-    def _convert_nodeComma_to_nodeParenthesis(self, string:str)->str:
-        return string.replace('node, ','ops.node(')
 
 
 
@@ -39,4 +55,4 @@ if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
     tclFileName = os.path.join(project_path, "Nodes.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    convert.node_convert()
+    convert.node()
