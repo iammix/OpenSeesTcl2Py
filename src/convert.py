@@ -30,7 +30,7 @@ class ConvertTcl2Py():
 
     def node(self):
         # TODO: Line split different than tab
-        #  labels: todo
+        #  labels: todo, enhancement
         lines = self._get_node_lines()
         node_tag = []
         x = []
