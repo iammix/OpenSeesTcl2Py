@@ -44,7 +44,8 @@ class ConvertTcl2Py():
                 z.append(line_list[3])
             else:
                 # TODO In case the separation is not tab but something else
-                #   labels: todo
+                #  labels: todo
+                
                 pass
         print(node_tag, x, y, z)
 
