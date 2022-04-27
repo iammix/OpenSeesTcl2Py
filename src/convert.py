@@ -29,6 +29,9 @@ class ConvertTcl2Py():
             tclLines = tclFile.readlines()
 
     def node(self):
+        # TODO The case that the line spit is different than tab.
+        # It can be a single or multiple spaces.
+        #  labels: todo
         lines = self._get_node_lines()
         node_tag = []
         x = []
