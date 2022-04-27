@@ -146,11 +146,39 @@ class ConvertTcl2Py():
         tclFile.close()
         return mass_lines
 
+    def set_variables(self):
+        # TODO Handle expr 
+        lines = self._get_set_lines()
+        variable_list = []
+        value_of_variable = []
+        for line in lines:
+            line_list = line.split(' ')
+            if len(line_list) > 1:
+                variable_list.append(line_list[1])
+                value_of_variable.append(line_list[2])
+            else:
+                pass
+        self.set_variables_lines = []
+        for i in range(len(variable_list)):
+            self.set_variables_lines.append(f"{variable_list[i]} = {value_of_variable[i]}")
+        return self.set_variables_lines
+
+    def _get_set_lines(self):
+        set_variable_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('set'):
+                    set_variable_lines.append(line)
+        tclFile.close()
+        return set_variable_lines
+
+
 if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "Mass.tcl")
+    tclFileName = os.path.join(project_path, "Set_variables.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.mass()
+    lines = convert.set_variables()
     with open('python.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
