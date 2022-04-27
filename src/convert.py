@@ -29,6 +29,8 @@ class ConvertTcl2Py():
             tclLines = tclFile.readlines()
 
     def node(self):
+        # TODO: Line split different than tab
+        #  labels: todo
         lines = self._get_node_lines()
         node_tag = []
         x = []
