@@ -190,6 +190,9 @@ class ConvertTcl2Py():
                 pass
         self.section_elastic_lines = []
         for i in range(len(section_list)):
+            for j in range(2, 9):
+                if section_list[i][j].startswith('$'):
+                    section_list[i][j] = section_list[i][j][1:]
             self.section_elastic_lines.append(
                 f"ops.section('Elastic', {section_list[i][2]}, {section_list[i][3]}, {section_list[i][4]}, {section_list[i][5]}, {section_list[i][6]}, {section_list[i][7]}, {section_list[i][8]})")
         return self.section_elastic_lines
