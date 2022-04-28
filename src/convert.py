@@ -147,7 +147,10 @@ class ConvertTcl2Py():
         return mass_lines
 
     def set_variables(self):
-        # TODO Handle expr 
+        # TODO Handle expr in variable setter
+        #  labels: todo, enhancement
+        #  assignees: iammix
+
         lines = self._get_set_lines()
         variable_list = []
         value_of_variable = []
@@ -155,6 +158,9 @@ class ConvertTcl2Py():
             line_list = line.split(' ')
             if len(line_list) > 1:
                 variable_list.append(line_list[1])
+                if line_list[2].endswith(';'):
+                    print(line_list[2])
+                    line_list[2] = line_list[2][:-1]
                 value_of_variable.append(line_list[2])
             else:
                 pass
