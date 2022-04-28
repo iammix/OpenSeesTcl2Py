@@ -180,7 +180,19 @@ class ConvertTcl2Py():
         return set_variable_lines
 
     def section_Elastic(self):
-        pass
+        lines = self._get_section_elastic_lines()
+        section_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            if len(line_list) > 1:
+                section_list.append(line_list)
+            else:
+                pass
+        self.section_elastic_lines = []
+        for i in range(len(section_list)):
+            self.section_elastic_lines.append(
+                f"ops.section('Elastic', {section_list[i][2]}, {section_list[i][3]}, {section_list[i][4]}, {section_list[i][5]}, {section_list[i][6]}, {section_list[i][7]}, {section_list[i][8]})")
+        return self.section_elastic_lines
 
     def _get_section_elastic_lines(self) -> list:
         section_elastic_lines = []
@@ -193,15 +205,14 @@ class ConvertTcl2Py():
                         section_elastic_lines.append(line)
         tclFile.close()
         return section_elastic_lines
-    
 
 
 if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "Set_variables.tcl")
+    tclFileName = os.path.join(project_path, "SectionElastic.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.set_variables()
-    with open('python.py', 'w') as pythonFile:
+    lines = convert.section_Elastic()
+    with open('model.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
     pythonFile.close()
