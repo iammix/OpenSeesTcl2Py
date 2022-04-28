@@ -169,7 +169,7 @@ class ConvertTcl2Py():
             self.set_variables_lines.append(f"{variable_list[i]} = {value_of_variable[i]}")
         return self.set_variables_lines
 
-    def _get_set_lines(self):
+    def _get_set_lines(self) -> list:
         set_variable_lines = []
         with open(self.tclFileName, 'r') as tclFile:
             tclLines = tclFile.readlines()
@@ -178,6 +178,22 @@ class ConvertTcl2Py():
                     set_variable_lines.append(line)
         tclFile.close()
         return set_variable_lines
+
+    def section_Elastic(self):
+        pass
+
+    def _get_section_elastic_lines(self) -> list:
+        section_elastic_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('section'):
+                    line_split = line.split(' ')
+                    if line_split[1] == 'Elastic':
+                        section_elastic_lines.append(line)
+        tclFile.close()
+        return section_elastic_lines
+    
 
 
 if __name__ == "__main__":
