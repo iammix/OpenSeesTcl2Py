@@ -274,18 +274,23 @@ class ConvertTcl2Py():
         # labels: todo, bug
         # assignees: iammix
         lines = self._get_element_zerolength()
-        element_list = []
+        element_list21 = []
+        element_list19 = []
         for line in lines:
             line_list = line.split(' ')
             if len(line_list) > 21:
-                element_list.append(line_list)
+                element_list21.append(line_list)
             else:
-                pass
+                element_list19.append(line_list)
         self.element_lines = []
-        for i in range(len(element_list)):
+        for i in range(len(element_list21)):
             self.element_lines.append(
-                f"ops.element('zeroLength', {element_list[i][2]}, {element_list[i][3]}, {element_list[i][4]}, '-mat', {element_list[i][6]}, {element_list[i][7]}, {element_list[i][8]}, {element_list[i][9]}, {element_list[i][10]}, '-dir', 1, 2, 3, 4, 5, 6, '-orient', 0, 0, 1, 1, 0, 0)"
+                f"ops.element('zeroLength', {element_list21[i][2]}, {element_list21[i][3]}, {element_list21[i][4]}, '-mat', {element_list21[i][6]}, {element_list21[i][7]}, {element_list21[i][8]}, {element_list21[i][9]}, {element_list21[i][10]}, '-dir', 1, 2, 3, 4, 5, 6, '-orient', 0, 0, 1, 1, 0, 0)"
             )
+        for i in range(len(element_list19)):
+            self.element_lines.append(
+                f"ops.element('zeroLength', {element_list19[i][2]}, {element_list19[i][3]}, {element_list19[i][4]}, '-mat', {element_list19[i][6]}, {element_list19[i][7]}, {element_list19[i][8]}, '-dir', 1, 2, 3, '-orient', 0, 0, 1, 1, 0, 0)")
+
         return self.element_lines
 
     def _get_element_zerolength(self) -> list:
