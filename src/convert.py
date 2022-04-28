@@ -209,12 +209,40 @@ class ConvertTcl2Py():
         tclFile.close()
         return section_elastic_lines
 
+    def geotransform(self):
+        # TODO [geotransform] remove $ from variable
+        # labels: todo, bug
+        # assignees: iammix
+        lines = self._get_geotransform_lines()
+        geotransform_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            if len(line_list) > 1:
+                geotransform_list.append(line_list)
+            else:
+                pass
+        self.geotransform_lines = []
+        for i in range(len(geotransform_list)):
+            self.geotransform_lines.append(
+                f"ops.geotransform('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
+        return self.geotransform_lines
+
+    def _get_geotransform_lines(self) -> list:
+        geotransform_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('geomTransf'):
+                    geotransform_lines.append(line)
+        tclFile.close()
+        return geotransform_lines
+
 
 if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "SectionElastic.tcl")
+    tclFileName = os.path.join(project_path, "GeoTransform.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.section_Elastic()
+    lines = convert.geotransform()
     with open('model.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
