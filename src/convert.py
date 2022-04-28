@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import shutil
 
 
 class ConvertTcl2Py():
@@ -268,13 +269,54 @@ class ConvertTcl2Py():
         tclFile.close()
         return element_nonlinearBeamColumn_lines
 
+    def element_zerolength(self):
+        # TODO [element_zerolength] remove $ from variables in ops.element
+        # labels: todo, bug
+        # assignees: iammix
+        lines = self._get_element_zerolength()
+        element_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            if len(line_list) > 21:
+                element_list.append(line_list)
+            else:
+                pass
+        self.element_lines = []
+        for i in range(len(element_list)):
+            self.element_lines.append(
+                f"ops.element('zeroLength', {element_list[i][2]}, {element_list[i][3]}, {element_list[i][4]}, '-mat', {element_list[i][6]}, {element_list[i][7]}, {element_list[i][8]}, {element_list[i][9]}, {element_list[i][10]}, '-dir', 1, 2, 3, 4, 5, 6, '-orient', 0, 0, 1, 1, 0, 0)"
+            )
+        return self.element_lines
 
-if __name__ == "__main__":
+    def _get_element_zerolength(self) -> list:
+        element_zerolength_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('element'):
+                    new_line = line.split(' ')
+                    if new_line[1] == 'zeroLength':
+                        element_zerolength_lines.append(line)
+        tclFile.close()
+        return element_zerolength_lines
+
+
+def write_file():
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "foulModel.tcl")
+    if os.path.exists(os.path.join(project_path, 'modelOpenSeesPy.py')):
+        os.remove(os.path.join(project_path, 'modelOpenSeesPy.py'))
+        print('File Deleted . . .')
+
+    modelName = 'foulModel.tcl'
+    tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.element_nonlinearBeamColumn()
-    with open('model.py', 'w') as pythonFile:
+    lines = convert.element_zerolength()
+    with open('modelOpenSeesPy.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
+    print('File Created . . .')
     pythonFile.close()
+
+
+if __name__ == "__main__":
+    write_file()

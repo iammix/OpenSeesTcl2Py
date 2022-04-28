@@ -4,28 +4,28 @@
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
-wipe;         # clear opensees model
-model BasicBuilder -ndm 3 -ndf 6;  # 3 dimensions, 6 dof per node
+wipe; # clear opensees model
+model BasicBuilder -ndm 3 -ndf 6; # 3 dimensions, 6 dof per node
 
-set EIGENDir EIGEN;   # set up name of data directory
-file mkdir $EIGENDir;    # create data directory
-set GMdir "../GMfiles";  # ground-motion file directory
+set EIGENDir EIGEN; # set up name of data directory
+file mkdir $EIGENDir; # create data directory
+set GMdir "../GMfiles"; # ground-motion file directory
 
-set THXDir THX;   # set up name of data directory
-file mkdir $THXDir;    # create data directory
-set GMdir "../GMfiles";  # ground-motion file directory
+set THXDir THX; # set up name of data directory
+file mkdir $THXDir; # create data directory
+set GMdir "../GMfiles"; # ground-motion file directory
 
-#set GravityDir Gravity;   # set up name of data directory
-#file mkdir $GravityDir;    # create data directory
-#set GMdir "../GMfiles";  # ground-motion file directory
+#set GravityDir Gravity; # set up name of data directory
+#file mkdir $GravityDir; # create data directory
+#set GMdir "../GMfiles"; # ground-motion file directory
 
 
-#source DisplayPlane.tcl;  # procedure for displaying a plane in model
-#source DisplayModel3D.tcl;  # procedure for displaying 3D perspectives of model
+#source DisplayPlane.tcl; # procedure for displaying a plane in model
+#source DisplayModel3D.tcl; # procedure for displaying 3D perspectives of model
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  2. DEFINE NODAL COORDINATES
+# 2. DEFINE NODAL COORDINATES
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -1066,12 +1066,12 @@ node 5630 237 5.25 -34.75
 node 5640 237 5.25 -32.75
 node 5650 237 5.25 -30.75
 
-### KOMVOI GIA ZERO LENGTH  VATHRWN ME PEDILA
+### KOMVOI GIA ZERO LENGTH VATHRWN ME PEDILA
 node 77000 40 0 -21 ;
 node 78000 80 0 -25.5 ;
 node 79000 120 0 -30 ;
 
-### KOMVOI GIA ZERO LENGTH  ARISTEROU AKROVATHROY
+### KOMVOI GIA ZERO LENGTH ARISTEROU AKROVATHROY
 ## diamhkhs
 node 8070 -1.15 0 1.5 ;
 ## vash akrovathrou aristera
@@ -1080,7 +1080,7 @@ node 7860 -0.575 0 -3.5 ;
 #node 8200 0 -6.1 0.1 ;
 #node 8170 0 6 0.1 ;
 
-### KOMVOI GIA ZERO LENGTH  DEKSIOU AKROVATHROY
+### KOMVOI GIA ZERO LENGTH DEKSIOU AKROVATHROY
 ## diamhkhs
 node 8340 281.15 0 1.5 ;
 ## vash akrovathrou deksia
@@ -1091,7 +1091,7 @@ node 8210 280.575 0 -3.5 ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  3. MASSES
+# 3. MASSES
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -1205,11 +1205,11 @@ mass 82 30.413 30.413 30.413 0 0 0 ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  4. BOUNDARY CONDITIONS
+# 4. BOUNDARY CONDITIONS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
-#fixY 0.0  1 1 1 0 1 0;  # pin all Y=0.0 nodes
+#fixY 0.0 1 1 1 0 1 0; # pin all Y=0.0 nodes
 
 ### Desmeuw ton deutero komvo tou zero length (oi prwtoi komvoi einai oi 89,97,103,114 kai oi 890,970,1030, 1140 exoun akrivws tis idies syntetagmenes)
 
@@ -1554,7 +1554,7 @@ fix 5650 1 1 1 1 1 1;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  5. ElasticSection GEOMETRIES (Deck, Foundation, Rigid)
+# 5. ElasticSection GEOMETRIES (Deck, Foundation, Rigid)
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -1605,7 +1605,7 @@ set IyRIGID 10000 ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  6. Elastic Section (Bridge Deck and Foundation)
+# 6. Elastic Section (Bridge Deck and Foundation)
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -1644,7 +1644,7 @@ section Elastic $secTagRIGID $Eth $ARIGID $IzRIGID $IyRIGID $Gdeck $JRIGID ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  7. Geometric Tranformation
+# 7. Geometric Tranformation
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -1669,7 +1669,7 @@ geomTransf Linear $IDColTransf 0 1 0;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  8. DECK FOUNDATION + RIGID ELEMENTS + SHEAR KEY (ELASTIC)
+# 8. DECK FOUNDATION + RIGID ELEMENTS + SHEAR KEY (ELASTIC)
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -2446,7 +2446,7 @@ element nonlinearBeamColumn 912 785 573 $numIntgrPtsNLBC $secTagPILES $IDColTran
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  9. PIER SECTION AND ELEMENTS (BEAM WITH HINGES)
+# 9. PIER SECTION AND ELEMENTS (BEAM WITH HINGES)
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -2454,7 +2454,7 @@ source Column_propertiesX+.txt
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  10. BEARINGS
+# 10. BEARINGS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -2555,7 +2555,7 @@ set KbyA 5969 ; #kN/m
 uniaxialMaterial Elastic $matTagKbyA $KbyA $eta ;
 
 #####################################################################################
-##########    ELEMENT BEARING   #######################################
+########## ELEMENT BEARING #######################################
 #####################################################################################
 
 #### EFEDRANA AKROVATHRWN
@@ -2632,7 +2632,7 @@ element zeroLength 6998 174 175 -mat $matTagKv1236 $matTagKh1236 $matTagKh1236 $
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  11. FOUNDATION PIERS
+# 11. FOUNDATION PIERS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -2648,19 +2648,19 @@ uniaxialMaterial Elastic $matTagKyP $KyP ;
 
 set matTagKzP 71 ;
 set KzP 19141028.84 ; #kN/m
-uniaxialMaterial Elastic $matTagKzP $KzP  ;
+uniaxialMaterial Elastic $matTagKzP $KzP ;
 
 set matTagKrxP 81 ;
 set KrxP 486384205.3; #kN/m
-uniaxialMaterial Elastic $matTagKrxP $KrxP  ;
+uniaxialMaterial Elastic $matTagKrxP $KrxP ;
 
 set matTagKryP 92 ;
 set KryP 503156074; #kN/m
-uniaxialMaterial Elastic $matTagKryP $KryP  ;
+uniaxialMaterial Elastic $matTagKryP $KryP ;
 
 set matTagKrzP 93 ;
 set KrzP 789790660 ; #kN/m
-uniaxialMaterial Elastic $matTagKrzP $KrzP  ;
+uniaxialMaterial Elastic $matTagKrzP $KrzP ;
 
 element zeroLength 9710 77000 77 -mat $matTagKzP $matTagKxP $matTagKyP $matTagKrxP $matTagKrzP $matTagKryP -dir 1 2 3 4 5 6 -orient 0 0 1 1 0 0 ;
 element zeroLength 9711 78000 78 -mat $matTagKzP $matTagKxP $matTagKyP $matTagKrxP $matTagKrzP $matTagKryP -dir 1 2 3 4 5 6 -orient 0 0 1 1 0 0 ;
@@ -2689,337 +2689,337 @@ uniaxialMaterial Elastic $matTagkzPile $kzPile ;
 
 #### vathro 45m
 
-element zeroLength 8000 3080 308  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8001 3090 309  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8002 3100 310  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8003 3110 311  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8004 3120 312  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8005 3130 313  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8006 3140 314  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8007 3150 315  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8008 3160 316  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8009 3170 317  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8010 6060 606  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8011 6070 607  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8012 6080 608  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8013 6090 609  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8014 6100 610  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8015 6110 611  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8016 6120 612  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8017 6130 613  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8018 6140 614  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8019 6150 615  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8020 6160 616  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8021 6170 617  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8022 6180 618  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8023 6190 619  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8024 6200 620  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8025 6210 621  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8026 6220 622  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8027 6230 623  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8028 6240 624  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8029 6250 625  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8030 6260 626  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8031 6270 627  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8032 6280 628  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8033 6290 629  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8034 6300 630  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8035 6310 631  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8036 6320 632  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8037 6330 633  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8038 6340 634  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8039 6350 635  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8040 6360 636  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8041 6370 637  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8042 6380 638  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8043 6390 639  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8044 6400 640  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8045 6410 641  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8046 6420 642  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8047 6430 643  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8048 6440 644  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8049 6450 645  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8050 6460 646  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8051 6470 647  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8052 6480 648  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8053 6490 649  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8054 6500 650  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8055 6510 651  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8056 6520 652  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8057 6530 653  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8058 6540 654  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8059 6550 655  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8060 6560 656  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8061 6570 657  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8062 6580 658  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8063 6590 659  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8064 6600 660  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8065 6610 661  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8066 6620 662  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8067 6630 663  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8068 6640 664  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8069 6650 665  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8070 6660 666  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8071 6670 667  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8072 6680 668  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8073 6690 669  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8074 6700 670  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8075 6710 671  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8076 6720 672  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8077 6730 673  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8078 6740 674  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8079 6750 675  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8080 6760 676  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8081 6770 677  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8082 6780 678  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8083 6790 679  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8084 6800 680  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8085 6810 681  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8086 6820 682  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8087 6830 683  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8088 6840 684  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8089 6850 685  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8090 6860 686  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8091 6870 687  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8092 6880 688  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8093 6890 689  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8094 6900 690  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8095 6910 691  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8096 6920 692  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8097 6930 693  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8098 6940 694  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 8099 6950 695  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
+element zeroLength 8000 3080 308 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8001 3090 309 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8002 3100 310 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8003 3110 311 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8004 3120 312 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8005 3130 313 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8006 3140 314 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8007 3150 315 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8008 3160 316 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8009 3170 317 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8010 6060 606 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8011 6070 607 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8012 6080 608 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8013 6090 609 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8014 6100 610 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8015 6110 611 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8016 6120 612 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8017 6130 613 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8018 6140 614 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8019 6150 615 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8020 6160 616 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8021 6170 617 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8022 6180 618 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8023 6190 619 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8024 6200 620 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8025 6210 621 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8026 6220 622 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8027 6230 623 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8028 6240 624 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8029 6250 625 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8030 6260 626 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8031 6270 627 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8032 6280 628 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8033 6290 629 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8034 6300 630 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8035 6310 631 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8036 6320 632 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8037 6330 633 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8038 6340 634 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8039 6350 635 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8040 6360 636 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8041 6370 637 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8042 6380 638 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8043 6390 639 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8044 6400 640 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8045 6410 641 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8046 6420 642 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8047 6430 643 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8048 6440 644 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8049 6450 645 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8050 6460 646 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8051 6470 647 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8052 6480 648 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8053 6490 649 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8054 6500 650 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8055 6510 651 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8056 6520 652 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8057 6530 653 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8058 6540 654 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8059 6550 655 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8060 6560 656 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8061 6570 657 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8062 6580 658 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8063 6590 659 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8064 6600 660 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8065 6610 661 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8066 6620 662 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8067 6630 663 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8068 6640 664 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8069 6650 665 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8070 6660 666 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8071 6670 667 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8072 6680 668 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8073 6690 669 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8074 6700 670 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8075 6710 671 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8076 6720 672 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8077 6730 673 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8078 6740 674 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8079 6750 675 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8080 6760 676 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8081 6770 677 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8082 6780 678 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8083 6790 679 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8084 6800 680 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8085 6810 681 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8086 6820 682 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8087 6830 683 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8088 6840 684 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8089 6850 685 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8090 6860 686 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8091 6870 687 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8092 6880 688 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8093 6890 689 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8094 6900 690 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8095 6910 691 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8096 6920 692 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8097 6930 693 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8098 6940 694 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 8099 6950 695 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
 
 #### vathro 50.6m
 
-element zeroLength 90000 6960 696  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90001 6970 697  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90002 6980 698  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90003 6990 699  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90004 7000 700  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90005 7010 701  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90006 7020 702  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90007 7030 703  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90008 7040 704  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90009 7050 705  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90010 7060 706  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90011 7070 707  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90012 7080 708  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90013 7090 709  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90014 7100 710  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90015 7110 711  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90016 7120 712  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90017 7130 713  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90018 7140 714  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90019 7150 715  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90020 7160 716  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90021 7170 717  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90022 7180 718  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90023 7190 719  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90024 7200 720  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90025 7210 721  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90026 7220 722  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90027 7230 723  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90028 7240 724  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90029 7250 725  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90030 7260 726  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90031 7270 727  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90032 7280 728  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90033 7290 729  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90034 7300 730  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90035 7310 731  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90036 7320 732  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90037 7330 733  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90038 7340 734  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90039 7350 735  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90040 7360 736  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90041 7370 737  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90042 7380 738  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90043 7390 739  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90044 7400 740  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90045 7410 741  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90046 7420 742  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90047 7430 743  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90048 7440 744  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90049 7450 745  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90050 7460 746  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90051 7470 747  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90052 7480 748  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90053 7490 749  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90054 7500 750  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90055 7510 751  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90056 7520 752  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90057 7530 753  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90058 7540 754  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90059 7550 755  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90060 7560 756  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90061 7570 757  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90062 7580 758  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90063 7590 759  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90064 7600 760  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90065 7610 761  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90066 7620 762  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90067 7630 763  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90068 7640 764  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90069 7650 765  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90070 7660 766  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90071 7670 767  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90072 7680 768  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90073 7690 769  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90074 7700 770  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90075 7710 771  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90076 7720 772  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90077 7730 773  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90078 7740 774  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90079 7750 775  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90080 7760 776  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90081 7770 777  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90082 7780 778  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90083 7790 779  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90084 7800 780  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90085 7810 781  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90086 7820 782  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90087 7830 783  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90088 7840 784  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 90089 7850 785  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
+element zeroLength 90000 6960 696 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90001 6970 697 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90002 6980 698 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90003 6990 699 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90004 7000 700 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90005 7010 701 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90006 7020 702 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90007 7030 703 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90008 7040 704 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90009 7050 705 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90010 7060 706 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90011 7070 707 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90012 7080 708 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90013 7090 709 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90014 7100 710 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90015 7110 711 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90016 7120 712 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90017 7130 713 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90018 7140 714 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90019 7150 715 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90020 7160 716 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90021 7170 717 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90022 7180 718 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90023 7190 719 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90024 7200 720 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90025 7210 721 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90026 7220 722 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90027 7230 723 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90028 7240 724 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90029 7250 725 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90030 7260 726 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90031 7270 727 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90032 7280 728 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90033 7290 729 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90034 7300 730 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90035 7310 731 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90036 7320 732 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90037 7330 733 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90038 7340 734 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90039 7350 735 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90040 7360 736 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90041 7370 737 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90042 7380 738 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90043 7390 739 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90044 7400 740 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90045 7410 741 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90046 7420 742 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90047 7430 743 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90048 7440 744 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90049 7450 745 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90050 7460 746 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90051 7470 747 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90052 7480 748 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90053 7490 749 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90054 7500 750 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90055 7510 751 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90056 7520 752 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90057 7530 753 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90058 7540 754 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90059 7550 755 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90060 7560 756 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90061 7570 757 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90062 7580 758 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90063 7590 759 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90064 7600 760 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90065 7610 761 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90066 7620 762 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90067 7630 763 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90068 7640 764 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90069 7650 765 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90070 7660 766 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90071 7670 767 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90072 7680 768 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90073 7690 769 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90074 7700 770 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90075 7710 771 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90076 7720 772 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90077 7730 773 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90078 7740 774 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90079 7750 775 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90080 7760 776 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90081 7770 777 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90082 7780 778 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90083 7790 779 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90084 7800 780 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90085 7810 781 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90086 7820 782 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90087 7830 783 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90088 7840 784 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 90089 7850 785 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
 
 
 #### vathro 27.5m
 
-element zeroLength 100000 4760 476  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100001 4770 477  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100002 4780 478  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100003 4790 479  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100004 4800 480  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100005 4810 481  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100006 4820 482  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100007 4830 483  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100008 4840 484  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100009 4850 485  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100010 4860 486  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100011 4870 487  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100012 4880 488  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100013 4890 489  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100014 4900 490  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100015 4910 491  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100016 4920 492  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100017 4930 493  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100018 4940 494  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100019 4950 495  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100020 4960 496  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100021 4970 497  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100022 4980 498  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100023 4990 499  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100024 5000 500  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100025 5010 501  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100026 5020 502  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100027 5030 503  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100028 5040 504  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100029 5050 505  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100030 5060 506  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100031 5070 507  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100032 5080 508  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100033 5090 509  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100034 5100 510  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100035 5110 511  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100036 5120 512  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100037 5130 513  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100038 5140 514  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100039 5150 515  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100040 5160 516  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100041 5170 517  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100042 5180 518  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100043 5190 519  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100044 5200 520  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100045 5210 521  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100046 5220 522  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100047 5230 523  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100048 5240 524  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100049 5250 525  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100050 5260 526  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100051 5270 527  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100052 5280 528  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100053 5290 529  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100054 5300 530  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100055 5310 531  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100056 5320 532  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100057 5330 533  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100058 5340 534  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100059 5350 535  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100060 5360 536  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100061 5370 537  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100062 5380 538  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100063 5390 539  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100064 5400 540  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100065 5410 541  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100066 5420 542  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100067 5430 543  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100068 5440 544  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100069 5450 545  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100070 5460 546  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100071 5470 547  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100072 5480 548  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100073 5490 549  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100074 5500 550  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100075 5510 551  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100076 5520 552  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100077 5530 553  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100078 5540 554  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100079 5550 555  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100080 5560 556  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100081 5570 557  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100082 5580 558  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100083 5590 559  -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100084 5600 560  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100085 5610 561  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100086 5620 562  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100087 5630 563  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100088 5640 564  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 100089 5650 565  -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
+element zeroLength 100000 4760 476 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100001 4770 477 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100002 4780 478 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100003 4790 479 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100004 4800 480 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100005 4810 481 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100006 4820 482 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100007 4830 483 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100008 4840 484 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100009 4850 485 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100010 4860 486 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100011 4870 487 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100012 4880 488 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100013 4890 489 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100014 4900 490 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100015 4910 491 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100016 4920 492 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100017 4930 493 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100018 4940 494 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100019 4950 495 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100020 4960 496 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100021 4970 497 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100022 4980 498 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100023 4990 499 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100024 5000 500 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100025 5010 501 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100026 5020 502 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100027 5030 503 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100028 5040 504 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100029 5050 505 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100030 5060 506 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100031 5070 507 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100032 5080 508 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100033 5090 509 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100034 5100 510 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100035 5110 511 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100036 5120 512 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100037 5130 513 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100038 5140 514 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100039 5150 515 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100040 5160 516 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100041 5170 517 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100042 5180 518 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100043 5190 519 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100044 5200 520 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100045 5210 521 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100046 5220 522 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100047 5230 523 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100048 5240 524 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100049 5250 525 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100050 5260 526 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100051 5270 527 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100052 5280 528 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100053 5290 529 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100054 5300 530 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100055 5310 531 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100056 5320 532 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100057 5330 533 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100058 5340 534 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100059 5350 535 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100060 5360 536 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100061 5370 537 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100062 5380 538 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100063 5390 539 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100064 5400 540 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100065 5410 541 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100066 5420 542 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100067 5430 543 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100068 5440 544 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100069 5450 545 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100070 5460 546 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100071 5470 547 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100072 5480 548 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100073 5490 549 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100074 5500 550 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100075 5510 551 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100076 5520 552 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100077 5530 553 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100078 5540 554 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100079 5550 555 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100080 5560 556 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100081 5570 557 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100082 5580 558 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100083 5590 559 -mat $matTagkz1Pile $matTagkxyPileB $matTagkxyPileB -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100084 5600 560 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100085 5610 561 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100086 5620 562 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100087 5630 563 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100088 5640 564 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 100089 5650 565 -mat $matTagkz1Pile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
 
 
 ######## ZERO LENGTH PILES KATAKORYFA ELATHRIA PASSALWN #############
 
-element zeroLength 2000 3330 333  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2001 3340 334  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2002 3350 335  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2003 3360 336  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2004 3370 337  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2005 3380 338  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2006 3390 339  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2007 3400 340  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2008 3410 341  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2009 3420 342  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2010 5960 596  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2011 5970 597  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2012 5980 598  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2013 5990 599  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2014 6000 600  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2015 6010 601  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2016 6020 602  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2017 6030 603  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2018 6040 604  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2019 6050 605  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2020 4640 464  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2021 4650 465  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2022 4660 466  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2023 4670 467  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2024 4680 468  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2025 4690 469  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2026 4700 470  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2027 4710 471  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2028 4720 472  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 2029 4730 473  -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA  -dir 1 2 3  -orient 0 0 1 1 0 0 ;
+element zeroLength 2000 3330 333 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2001 3340 334 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2002 3350 335 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2003 3360 336 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2004 3370 337 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2005 3380 338 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2006 3390 339 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2007 3400 340 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2008 3410 341 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2009 3420 342 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2010 5960 596 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2011 5970 597 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2012 5980 598 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2013 5990 599 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2014 6000 600 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2015 6010 601 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2016 6020 602 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2017 6030 603 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2018 6040 604 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2019 6050 605 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2020 4640 464 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2021 4650 465 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2022 4660 466 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2023 4670 467 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2024 4680 468 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2025 4690 469 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2026 4700 470 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2027 4710 471 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2028 4720 472 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 2029 4730 473 -mat $matTagkzPile $matTagkxyPileA $matTagkxyPileA -dir 1 2 3 -orient 0 0 1 1 0 0 ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  12. ABUTMENTS
+# 12. ABUTMENTS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
 
 #####################################################################################
-###############    LONGITUDINAL   ###################################################
+############### LONGITUDINAL ###################################################
 #####################################################################################
 
 #uniaxialMaterial ElasticPPGap $matTag $E $Fy $gap <$eta> <damage>
@@ -3031,7 +3031,7 @@ uniaxialMaterial ElasticPPGap $matTagGap1X $E $Fygap $gap ;
 
 #uniaxialMaterial ElasticPPGap $matTag $E $Fy $gap <$eta> <damage>
 set matTagGap2X 888 ;
-set E 1750000  ; #kN/m
+set E 1750000 ; #kN/m
 set Fygap 55800 ;
 set gap 0.20 ;
 uniaxialMaterial ElasticPPGap $matTagGap2X $E $Fygap $gap ;
@@ -3059,7 +3059,7 @@ uniaxialMaterial Hysteretic $matTagAbtm_X $s1pX $e1pX $s2pX $e2pX $s3pX $e3pX [e
 
 
 #####################################################################################
-###############    TRANSVERSE     ###################################################
+############### TRANSVERSE ###################################################
 #####################################################################################
 
 ## Hysteretic Abutment_Y (To dairoume dia 2 giati exoume 2 shmeia syndeshs sto abutmt)
@@ -3083,25 +3083,25 @@ uniaxialMaterial Hysteretic $matTagAbtm_Y $s1pY $e1pY $s2pY $e2pY $s3pY $e3pY [e
 
 
 #####################################################################################
-##########    ELEMENTS ABUTMENT   #######################################
+########## ELEMENTS ABUTMENT #######################################
 #####################################################################################
 
 ### Elathrio Gap+Abtm (Series X) se seira me ta efedrana
 
-element zeroLength 9991 807 810 -mat  $matTagGap1X   -dir 2 -orient 0 0 1 1 0 0 ;
-element zeroLength 9992 834 835 -mat $matTagGap2X  -dir 2 -orient 0 0 1 1 0 0 ;
-element zeroLength 99991 8070 807 -mat  $matTagAbtm_X -dir 2 -orient 0 0 1 1 0 0 ;
-element zeroLength 99992 8340 834 -mat $matTagAbtm_X  -dir 2 -orient 0 0 1 1 0 0 ;
+element zeroLength 9991 807 810 -mat $matTagGap1X -dir 2 -orient 0 0 1 1 0 0 ;
+element zeroLength 9992 834 835 -mat $matTagGap2X -dir 2 -orient 0 0 1 1 0 0 ;
+element zeroLength 99991 8070 807 -mat $matTagAbtm_X -dir 2 -orient 0 0 1 1 0 0 ;
+element zeroLength 99992 8340 834 -mat $matTagAbtm_X -dir 2 -orient 0 0 1 1 0 0 ;
 
-### AbtmY  se seira me ta efedrana
+### AbtmY se seira me ta efedrana
 
-element zeroLength 9993 816 817 -mat  $matTagAbtm_Y  -dir 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 9994 819 820 -mat  $matTagAbtm_Y  -dir 3  -orient 0 0 1 1 0 0 ;
-element zeroLength 9995 836 837 -mat  $matTagAbtm_Y -dir 3 -orient 0 0 1 1 0 0 ;
-element zeroLength 9996 838 839 -mat  $matTagAbtm_Y  -dir 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 9993 816 817 -mat $matTagAbtm_Y -dir 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 9994 819 820 -mat $matTagAbtm_Y -dir 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 9995 836 837 -mat $matTagAbtm_Y -dir 3 -orient 0 0 1 1 0 0 ;
+element zeroLength 9996 838 839 -mat $matTagAbtm_Y -dir 3 -orient 0 0 1 1 0 0 ;
 
 #####################################################################################
-##########    ELEMENT THWRAKIO KAI TOIXOS ABUTMENT  #######################################
+########## ELEMENT THWRAKIO KAI TOIXOS ABUTMENT #######################################
 #####################################################################################
 
 ### THWRAKIO
@@ -3110,24 +3110,24 @@ element zeroLength 9996 838 839 -mat  $matTagAbtm_Y  -dir 3 -orient 0 0 1 1 0 0 
 
 # calculated stiffness parameters
 set Ecthwr 30000000; #kpa
-set Athwr [expr  0.4*12.0];
-set EAthwr [expr $Ecthwr*$Athwr];   # EA, for axial-force-strain relationship
+set Athwr [expr 0.4*12.0];
+set EAthwr [expr $Ecthwr*$Athwr]; # EA, for axial-force-strain relationship
 set Gthwr [expr $Ecthwr/2*(0.2+1)] ; #kPa
-set thwrMatTagAxial 30000;   # assign a tag number to the column axial behavior
-uniaxialMaterial Elastic $thwrMatTagAxial $EAthwr;    # this is not used as a material, this is an axial-force-strain response  (U1)
+set thwrMatTagAxial 30000; # assign a tag number to the column axial behavior
+uniaxialMaterial Elastic $thwrMatTagAxial $EAthwr; # this is not used as a material, this is an axial-force-strain response (U1)
 
 ### Thwrakio 12.0x0.4
 
-set thwrMatTagFlex0 20001;   # assign a tag number to the column flexural behavior
-set thwrSecTag 20002;    # assign a tag number to the column section tag
+set thwrMatTagFlex0 20001; # assign a tag number to the column flexural behavior
+set thwrSecTag 20002; # assign a tag number to the column section tag
 
-set Mythwr0 5398;    # yield moment
-set Muthwr0 5810;    # ultimate moment
-set PhiYthwr0 0.012;   # yield curvature
-set Phiuthwr0 0.1284;   # ultimate curvature
+set Mythwr0 5398; # yield moment
+set Muthwr0 5810; # ultimate moment
+set PhiYthwr0 0.012; # yield curvature
+set Phiuthwr0 0.1284; # ultimate curvature
 
-#uniaxialMaterial Steel01 $ColMatTagFlexM10 $MyColM10 $EIColeffM10 $bM10;   # bilinear behavior for flexure (R2, R3)
-uniaxialMaterial Hysteretic $thwrMatTagFlex0 [expr $Mythwr0-100] [expr $PhiYthwr0 -0.000222] $Mythwr0  $PhiYthwr0 $Muthwr0  $Phiuthwr0 [expr -$Mythwr0+100] [expr -$PhiYthwr0+0.000222] [expr -$Mythwr0] [expr -$PhiYthwr0] [expr -$Muthwr0] [expr -$Phiuthwr0] 0.0 0.0 0 0.0 0.7 ;
+#uniaxialMaterial Steel01 $ColMatTagFlexM10 $MyColM10 $EIColeffM10 $bM10; # bilinear behavior for flexure (R2, R3)
+uniaxialMaterial Hysteretic $thwrMatTagFlex0 [expr $Mythwr0-100] [expr $PhiYthwr0 -0.000222] $Mythwr0 $PhiYthwr0 $Muthwr0 $Phiuthwr0 [expr -$Mythwr0+100] [expr -$PhiYthwr0+0.000222] [expr -$Mythwr0] [expr -$PhiYthwr0] [expr -$Muthwr0] [expr -$Phiuthwr0] 0.0 0.0 0 0.0 0.7 ;
 
 section Aggregator $thwrSecTag $thwrMatTagAxial P $thwrMatTagFlex0 Mz; # combine axial and flexural behavior into one section (no P-M interaction here)
 #set modIthwr 0.23
@@ -3171,32 +3171,32 @@ uniaxialMaterial Elastic $matTagKy $Ky ;
 
 set matTagKz 70 ;
 set Kz 15825975.16 ; #kN/m
-uniaxialMaterial Elastic $matTagKz $Kz  ;
+uniaxialMaterial Elastic $matTagKz $Kz ;
 
 set matTagKrx 80 ;
 set Krx 314276813.8 ; #kN/m
-uniaxialMaterial Elastic $matTagKrx $Krx  ;
+uniaxialMaterial Elastic $matTagKrx $Krx ;
 
 set matTagKry 90 ;
 set Kry 125789019 ; #kN/m
-uniaxialMaterial Elastic $matTagKry $Kry  ;
+uniaxialMaterial Elastic $matTagKry $Kry ;
 
 set matTagKrz 91 ;
 set Krz 783994694.5; #kN/m
-uniaxialMaterial Elastic $matTagKrz $Krz  ;
+uniaxialMaterial Elastic $matTagKrz $Krz ;
 
 element zeroLength 9700 7860 786 -mat $matTagKz $matTagKx $matTagKy $matTagKrx $matTagKrz $matTagKry -dir 1 2 3 4 5 6 -orient 0 0 1 1 0 0 ;
 element zeroLength 9701 8210 821 -mat $matTagKz $matTagKx $matTagKy $matTagKrx $matTagKrz $matTagKry -dir 1 2 3 4 5 6 -orient 0 0 1 1 0 0 ;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  13. RECORDERS FOR GRAVITY LOADS
+# 13. RECORDERS FOR GRAVITY LOADS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
 ### Recorder Displacement
 
-#recorder Node -file $GravityDir/DFree.out -node 50 -dof 1 2 3 4 5 6  disp;   # displacements of free node
+#recorder Node -file $GravityDir/DFree.out -node 50 -dof 1 2 3 4 5 6 disp; # displacements of free node
 
 #recorder Node -time -file $GravityDir/disp.out -node 5 7 13 24 27 28 29 30 31 32 40 41 50 51 111 1111 112 113 114 115 1115 116 121 1121 122 123 124 125 126 127 128 129 131 1131 132 133 134 135 1135 136 60 61 70 700 71 80 81 -dof 1 2 3 4 5 6 disp;
 
@@ -3204,21 +3204,21 @@ element zeroLength 9701 8210 821 -mat $matTagKz $matTagKx $matTagKy $matTagKrx $
 
 #recorder Element -file $GravityDir/force.out -time -ele 62 force;
 
-#recorder Node -time-file $GravityDir/RBase60.out  -node 60   -dof 1 2 3 4 5 6 reaction;  # support reaction
-#recorder Node -time-file $GravityDir/RBase61.out  -node 61   -dof 1 2 3 4 5 6 reaction;  # support reaction
-#recorder Node -time-file $GravityDir/RBase80.out -node 80   -dof 1 2 3 4 5 6 reaction;  # support reaction
-#recorder Node -time-file $GravityDir/RBase81.out  -node 81   -dof 1 2 3 4 5 6 reaction;  # support reaction
+#recorder Node -time-file $GravityDir/RBase60.out -node 60 -dof 1 2 3 4 5 6 reaction; # support reaction
+#recorder Node -time-file $GravityDir/RBase61.out -node 61 -dof 1 2 3 4 5 6 reaction; # support reaction
+#recorder Node -time-file $GravityDir/RBase80.out -node 80 -dof 1 2 3 4 5 6 reaction; # support reaction
+#recorder Node -time-file $GravityDir/RBase81.out -node 81 -dof 1 2 3 4 5 6 reaction; # support reaction
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  14.GRAVITY LOADS
+# 14.GRAVITY LOADS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
 ### PREPEI NA MPOUN TA FORTIA LOGV IDIOU VAROUS , LOGW G1 KAI 0,2 Q
 #load $nodeTag (ndf $LoadValues), tha ta vgaloume san nodal gravity forces apo tis mazes
 # define GRAVITY -------------------------------------------------------------
-# GRAVITY LOADS # define gravity load applied to beams and columns --  eleLoad applies loads in local coordinate axis
+# GRAVITY LOADS # define gravity load applied to beams and columns -- eleLoad applies loads in local coordinate axis
 pattern Plain 101 Linear {
 load 247 0 0 -[expr 63.990 *9.81] 0 0 0 ;
 load 787 0 0 -[expr 157.383 *9.81] 0 0 0 ;
@@ -3324,25 +3324,25 @@ load 927 0 0 -[expr 60.826 *9.81] 0 0 0 ;
 load 82 0 0 -[expr 30.413 *9.81] 0 0 0 ;
 }
 # Gravity-analysis parameters -- load-controlled static analysis
-set Tol 1.0e-8;   # convergence tolerance for test
-numberer RCM;   # renumber dof's to minimize band-width (optimization), if you want to
+set Tol 1.0e-8; # convergence tolerance for test
+numberer RCM; # renumber dof's to minimize band-width (optimization), if you want to
 constraints Plain
-system BandGeneral ;  # how to store and solve the system of equations in the analysis (large model: try UmfPack)
-test EnergyIncr $Tol 6 ;   # determine if convergence has been achieved at the end of an iteration step
-algorithm Newton;   # use Newton's solution algorithm: updates tangent stiffness at every iteration
-set NstepGravity 5;    # apply gravity in 10 steps
-set DGravity [expr 1./$NstepGravity];  # first load increment;
+system BandGeneral ; # how to store and solve the system of equations in the analysis (large model: try UmfPack)
+test EnergyIncr $Tol 6 ; # determine if convergence has been achieved at the end of an iteration step
+algorithm Newton; # use Newton's solution algorithm: updates tangent stiffness at every iteration
+set NstepGravity 5; # apply gravity in 10 steps
+set DGravity [expr 1./$NstepGravity]; # first load increment;
 integrator LoadControl $DGravity; # determine the next time step for an analysis
-analysis Static;   # define type of analysis static or transient
-analyze $NstepGravity;  # apply gravity
+analysis Static; # define type of analysis static or transient
+analyze $NstepGravity; # apply gravity
 # ------------------------------------------------- maintain constant gravity loads and reset time to zero
 loadConst -time 0.0
-set Tol 1.0e-6;   # reduce tolerance after gravity loads
+set Tol 1.0e-6; # reduce tolerance after gravity loads
 puts "Model Built"
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  15. EIGEN ANALYSIS
+# 15. EIGEN ANALYSIS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -3365,7 +3365,7 @@ foreach t $T {
 close $Periods
 
 
-recorder Node -file $EIGENDir/eigenvectors1.txt -time -node 247 787 969 970 971 972 214 213 212 215 949 950 951 952 33 32 31 34 953 954 955 956 65 64 63 66 957 958 959 960 118 117 116 119 961 962 963 964 150 149 148 151 965 966 967 968 182 181 180 183 976 975 974 973 840 248 71 77 72 78 73 79 74 80 75 81 76 82 -dof 2  "eigen1"
+recorder Node -file $EIGENDir/eigenvectors1.txt -time -node 247 787 969 970 971 972 214 213 212 215 949 950 951 952 33 32 31 34 953 954 955 956 65 64 63 66 957 958 959 960 118 117 116 119 961 962 963 964 150 149 148 151 965 966 967 968 182 181 180 183 976 975 974 973 840 248 71 77 72 78 73 79 74 80 75 81 76 82 -dof 2 "eigen1"
 recorder Node -file $EIGENDir/eigenvectors2.txt -time -node 247 787 969 970 971 972 214 213 212 215 949 950 951 952 33 32 31 34 953 954 955 956 65 64 63 66 957 958 959 960 118 117 116 119 961 962 963 964 150 149 148 151 965 966 967 968 182 181 180 183 976 975 974 973 840 248 71 77 72 78 73 79 74 80 75 81 76 82 -dof 1 "eigen2"
 #recorder Node -file $EIGENDir/eigenvectors3.txt -time -node 1 7 8 9 10 11 12 13 14 15 16 17 18 4 2 55 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 56 3 57 42 43 44 45 46 47 48 49 50 51 52 53 54 -dof 1 2 3 4 5 6 "eigen3"
 #recorder Node -file $EIGENDir/eigenvectors4.txt -time -node 1 7 8 9 10 11 12 13 14 15 16 17 18 4 2 55 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 56 3 57 42 43 44 45 46 47 48 49 50 51 52 53 54 -dof 1 2 3 4 5 6 "eigen4"
@@ -3375,7 +3375,7 @@ analyze 1;
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  16. RECORDERS FOR TIME HISTORY
+# 16. RECORDERS FOR TIME HISTORY
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
@@ -3617,134 +3617,134 @@ recorder Element -file $THXDir/deform944.out -time -ele 944 section 1 deformatio
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  17. DYNAMIC EQ ANALYSIS
+# 17. DYNAMIC EQ ANALYSIS
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
 # DYNAMIC ANALYSIS PARAMETERS
 # CONSTRAINTS handler -- Determines how the constraint equations are enforced in the analysis (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/617.htm)
-#          Plain Constraints -- Removes constrained degrees of freedom from the system of equations
-#          Lagrange Multipliers -- Uses the method of Lagrange multipliers to enforce constraints
-#          Penalty Method -- Uses penalty numbers to enforce constraints
-#          Transformation Method -- Performs a condensation of constrained degrees of freedom
+# Plain Constraints -- Removes constrained degrees of freedom from the system of equations
+# Lagrange Multipliers -- Uses the method of Lagrange multipliers to enforce constraints
+# Penalty Method -- Uses penalty numbers to enforce constraints
+# Transformation Method -- Performs a condensation of constrained degrees of freedom
 constraints Transformation ;
 # DOF NUMBERER (number the degrees of freedom in the domain): (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/366.htm)
-#   determines the mapping between equation numbers and degrees-of-freedom
-#          Plain -- Uses the numbering provided by the user
-#          RCM -- Renumbers the DOF to minimize the matrix band-width using the Reverse Cuthill-McKee algorithm
+# determines the mapping between equation numbers and degrees-of-freedom
+# Plain -- Uses the numbering provided by the user
+# RCM -- Renumbers the DOF to minimize the matrix band-width using the Reverse Cuthill-McKee algorithm
 numberer RCM
 # SYSTEM (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/371.htm)
-#   Linear Equation Solvers (how to store and solve the system of equations in the analysis)
-#   -- provide the solution of the linear system of equations Ku = P. Each solver is tailored to a specific matrix topology.
-#          ProfileSPD -- Direct profile solver for symmetric positive definite matrices
-#          BandGeneral -- Direct solver for banded unsymmetric matrices
-#          BandSPD -- Direct solver for banded symmetric positive definite matrices
-#          SparseGeneral -- Direct solver for unsymmetric sparse matrices (-piv option)
-#          SparseSPD -- Direct solver for symmetric sparse matrices
-#          UmfPack -- Direct UmfPack solver for unsymmetric matrices
+# Linear Equation Solvers (how to store and solve the system of equations in the analysis)
+# -- provide the solution of the linear system of equations Ku = P. Each solver is tailored to a specific matrix topology.
+# ProfileSPD -- Direct profile solver for symmetric positive definite matrices
+# BandGeneral -- Direct solver for banded unsymmetric matrices
+# BandSPD -- Direct solver for banded symmetric positive definite matrices
+# SparseGeneral -- Direct solver for unsymmetric sparse matrices (-piv option)
+# SparseSPD -- Direct solver for symmetric sparse matrices
+# UmfPack -- Direct UmfPack solver for unsymmetric matrices
 system BandGeneral
 # TEST: # convergence test to
 # Convergence TEST (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/360.htm)
-#   -- Accept the current state of the domain as being on the converged solution path
-#   -- determine if convergence has been achieved at the end of an iteration step
-#          NormUnbalance -- Specifies a tolerance on the norm of the unbalanced load at the current iteration
-#          NormDispIncr -- Specifies a tolerance on the norm of the displacement increments at the current iteration
-#          EnergyIncr-- Specifies a tolerance on the inner product of the unbalanced load and displacement increments at the current iteration
-#          RelativeNormUnbalance --
-#          RelativeNormDispIncr --
-#          RelativeEnergyIncr --
-set Tol 1.e-8;                        # Convergence Test: tolerance
-set maxNumIter 1000;                # Convergence Test: maximum number of iterations that will be performed before "failure to converge" is returned
-set printFlag 0;                # Convergence Test: flag used to print information on convergence (optional)        # 1: print information on each step;
+# -- Accept the current state of the domain as being on the converged solution path
+# -- determine if convergence has been achieved at the end of an iteration step
+# NormUnbalance -- Specifies a tolerance on the norm of the unbalanced load at the current iteration
+# NormDispIncr -- Specifies a tolerance on the norm of the displacement increments at the current iteration
+# EnergyIncr-- Specifies a tolerance on the inner product of the unbalanced load and displacement increments at the current iteration
+# RelativeNormUnbalance --
+# RelativeNormDispIncr --
+# RelativeEnergyIncr --
+set Tol 1.e-8; # Convergence Test: tolerance
+set maxNumIter 1000; # Convergence Test: maximum number of iterations that will be performed before "failure to converge" is returned
+set printFlag 0; # Convergence Test: flag used to print information on convergence (optional) # 1: print information on each step;
 set TestType EnergyIncr; # Convergence-test type
 test $TestType $Tol $maxNumIter $printFlag;
 
 # Solution ALGORITHM: -- Iterate from the last time step to the current (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/682.htm)
-#          Linear -- Uses the solution at the first iteration and continues
-#          Newton -- Uses the tangent at the current iteration to iterate to convergence
-#          ModifiedNewton -- Uses the tangent at the first iteration to iterate to convergence
-#          NewtonLineSearch --
-#          KrylovNewton --
-#          BFGS --
-#          Broyden --
+# Linear -- Uses the solution at the first iteration and continues
+# Newton -- Uses the tangent at the current iteration to iterate to convergence
+# ModifiedNewton -- Uses the tangent at the first iteration to iterate to convergence
+# NewtonLineSearch --
+# KrylovNewton --
+# BFGS --
+# Broyden --
 set algorithmType ModifiedNewton
 algorithm $algorithmType;
 
-# Static INTEGRATOR: -- determine the next time step for an analysis  (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/689.htm)
-#          LoadControl -- Specifies the incremental load factor to be applied to the loads in the domain
-#          DisplacementControl -- Specifies the incremental displacement at a specified DOF in the domain
-#          Minimum Unbalanced Displacement Norm -- Specifies the incremental load factor such that the residual displacement norm in minimized
-#          Arc Length -- Specifies the incremental arc-length of the load-displacement path
+# Static INTEGRATOR: -- determine the next time step for an analysis (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/689.htm)
+# LoadControl -- Specifies the incremental load factor to be applied to the loads in the domain
+# DisplacementControl -- Specifies the incremental displacement at a specified DOF in the domain
+# Minimum Unbalanced Displacement Norm -- Specifies the incremental load factor such that the residual displacement norm in minimized
+# Arc Length -- Specifies the incremental arc-length of the load-displacement path
 # Transient INTEGRATOR: -- determine the next time step for an analysis including inertial effects
-#          Newmark -- The two parameter time-stepping method developed by Newmark
-#          HHT -- The three parameter Hilbert-Hughes-Taylor time-stepping method
-#          Central Difference -- Approximates velocity and acceleration by centered finite differences of displacement
+# Newmark -- The two parameter time-stepping method developed by Newmark
+# HHT -- The three parameter Hilbert-Hughes-Taylor time-stepping method
+# Central Difference -- Approximates velocity and acceleration by centered finite differences of displacement
 set NewmarkGamma 0.5; # Newmark-integrator gamma parameter (also HHT)
 set NewmarkBeta 0.25; # Newmark-integrator beta parameter
 integrator Newmark $NewmarkGamma $NewmarkBeta
 
-# ANALYSIS  -- defines what type of analysis is to be performed (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/324.htm)
-#          Static Analysis -- solves the KU=R problem, without the mass or damping matrices.
-#          Transient Analysis -- solves the time-dependent analysis. The time step in this type of analysis is constant. The time step in the output is also constant.
-#          variableTransient Analysis -- performs the same analysis type as the Transient Analysis object. The time step, however, is variable. This method is used when
-#                 there are convergence problems with the Transient Analysis object at a peak or when the time step is too small. The time step in the output is also variable.
+# ANALYSIS -- defines what type of analysis is to be performed (http://opensees.berkeley.edu/OpenSees/manuals/usermanual/324.htm)
+# Static Analysis -- solves the KU=R problem, without the mass or damping matrices.
+# Transient Analysis -- solves the time-dependent analysis. The time step in this type of analysis is constant. The time step in the output is also constant.
+# variableTransient Analysis -- performs the same analysis type as the Transient Analysis object. The time step, however, is variable. This method is used when
+# there are convergence problems with the Transient Analysis object at a peak or when the time step is too small. The time step in the output is also variable.
 analysis Transient
 
 # define DAMPING--------------------------------------------------------------------------------------
 # set damping based on first eigen mode
 set a0 0.38
 set a1 0.0065
-rayleigh    $a0 0.0 $a1 0.0
+rayleigh $a0 0.0 $a1 0.0
 #set freq [expr [eigen 1]**0.5]
 #set dampRatio 0.05
 #rayleigh 0. 0. 0. [expr 2*$dampRatio/$freq]
 
-#  ---------------------------------    perform Dynamic Ground-Motion Analysis
+# --------------------------------- perform Dynamic Ground-Motion Analysis
  # Uniform EXCITATION: acceleration input
-set IDloadTag 400;   # load tag
-set GMdirection 1;    # ground-motion direction
-set GMfile "NEWZEAL_A-MAT083.txt" ;   # ground-motion filenames
+set IDloadTag 400; # load tag
+set GMdirection 1; # ground-motion direction
+set GMfile "NEWZEAL_A-MAT083.txt" ; # ground-motion filenames
 set DtAnalysis 0.02; # time-step Dt for lateral analysis
-#set dt 0.01;   # time step for input ground motion
+#set dt 0.01; # time step for input ground motion
 set TmaxAnalysis [expr 27.]; # maximum duration of ground-motion analysis -- should be 50*$sec
-set GMfatt 10.0;   # data in input file is in g Unifts -- ACCELERATION TH
-set AccelSeries "Series -dt $DtAnalysis -filePath $GMfile -factor  $GMfatt";   # time series information
-pattern UniformExcitation  $IDloadTag  $GMdirection -accel  $AccelSeries  ;  # create Unifform excitation
+set GMfatt 10.0; # data in input file is in g Unifts -- ACCELERATION TH
+set AccelSeries "Series -dt $DtAnalysis -filePath $GMfile -factor $GMfatt"; # time series information
+pattern UniformExcitation $IDloadTag $GMdirection -accel $AccelSeries ; # create Unifform excitation
 set Nsteps [expr int($TmaxAnalysis/$DtAnalysis)];
-set ok [analyze $Nsteps $DtAnalysis];   # actually perform analysis; returns ok=0 if analysis was successful
+set ok [analyze $Nsteps $DtAnalysis]; # actually perform analysis; returns ok=0 if analysis was successful
 
-if {$ok != 0} {      ;     # if analysis was not successful.
+if {$ok != 0} { ; # if analysis was not successful.
  # change some analysis parameters to achieve convergence
  # performance is slower inside this loop
- #    Time-controlled analysis
+ # Time-controlled analysis
  set ok 0;
  set controlTime [getTime];
  while {$controlTime < $TmaxAnalysis && $ok == 0} {
-  set ok [analyze 1 $DtAnalysis]
-  set controlTime [getTime]
-  set ok [analyze 1 $DtAnalysis]
-  if {$ok != 0} {
-   puts "Trying Newton with Initial Tangent .."
-   test NormDispIncr   $Tol 1000  0
-   algorithm Newton -initial
-   set ok [analyze 1 $DtAnalysis]
-   test $TestType $Tol $maxNumIter  0
-   algorithm $algorithmType
-  }
-  if {$ok != 0} {
-   puts "Trying Broyden .."
-   algorithm Broyden 8
-   set ok [analyze 1 $DtAnalysis]
-   algorithm $algorithmType
-  }
-  if {$ok != 0} {
-   puts "Trying NewtonWithLineSearch .."
-   algorithm NewtonLineSearch .8
-   set ok [analyze 1 $DtAnalysis]
-   algorithm $algorithmType
-  }
+ set ok [analyze 1 $DtAnalysis]
+ set controlTime [getTime]
+ set ok [analyze 1 $DtAnalysis]
+ if {$ok != 0} {
+ puts "Trying Newton with Initial Tangent .."
+ test NormDispIncr $Tol 1000 0
+ algorithm Newton -initial
+ set ok [analyze 1 $DtAnalysis]
+ test $TestType $Tol $maxNumIter 0
+ algorithm $algorithmType
  }
-};      # end if ok !0
+ if {$ok != 0} {
+ puts "Trying Broyden .."
+ algorithm Broyden 8
+ set ok [analyze 1 $DtAnalysis]
+ algorithm $algorithmType
+ }
+ if {$ok != 0} {
+ puts "Trying NewtonWithLineSearch .."
+ algorithm NewtonLineSearch .8
+ set ok [analyze 1 $DtAnalysis]
+ algorithm $algorithmType
+ }
+ }
+}; # end if ok !0
 
 
 
@@ -3753,14 +3753,14 @@ wipe
 
 ##########################################################################################
 #-----------------------------------------------------------------------------------------
-#  19. CREATE GID FILE
+# 19. CREATE GID FILE
 #-----------------------------------------------------------------------------------------
 ##########################################################################################
 
 set meshFile [open nodes_input.flavia.msh w]
 puts $meshFile "MESH 100linear dimension 3 ElemType Linear Nnode 2"
 puts $meshFile "Coordinates"
-puts $meshFile "#node_number   coord_x   coord_y   coord_z"
+puts $meshFile "#node_number coord_x coord_y coord_z"
 set count 1
 set layerNodeCount 0
 puts $meshFile " 1 39.14 0 2.9 "
@@ -4800,7 +4800,7 @@ puts $meshFile " 8390 280 -6.1 0.1 "
 puts $meshFile "end coordinates"
 
 puts $meshFile "Elements"
-puts $meshFile "# element   node1   node2"
+puts $meshFile "# element node1 node2"
 puts $meshFile " 15 33 32 "
 puts $meshFile " 16 31 34 "
 puts $meshFile " 30 214 213 "
