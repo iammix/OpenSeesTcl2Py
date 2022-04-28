@@ -237,12 +237,38 @@ class ConvertTcl2Py():
         tclFile.close()
         return geotransform_lines
 
+    def element_nonlinearBeamColumn(self):
+        lines = self._get_element_nonlinearBeamColumn_lines()
+        element_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            if len(line_list) > 1:
+                element_list.append(line_list)
+            else: pass
+        self.element_lines = []
+        for i in range(len(element_list)):
+            self.element_lines.append(
+                f"ops.element('nonlinearBeamColumn', {element_list[i][2]}, {element_list[i][3]}, {element_list[i][4]}, {element_list[i][5]}, {element_list[i][6]}, {element_list[i][7]})")
+        return self.element_lines
+
+    def _get_element_nonlinearBeamColumn_lines(self) -> list:
+        element_nonlinearBeamColumn_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('element'):
+                    new_line = line.split(' ')
+                    if new_line[1] == 'nonlinearBeamColumn':
+                        element_nonlinearBeamColumn_lines.append(line)
+        tclFile.close()
+        return element_nonlinearBeamColumn_lines
+
 
 if __name__ == "__main__":
     project_path = Path(__file__).absolute().parent
-    tclFileName = os.path.join(project_path, "GeoTransform.tcl")
+    tclFileName = os.path.join(project_path, "ElementNonlinearBeamColumn.tcl")
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.geotransform()
+    lines = convert.element_nonlinearBeamColumn()
     with open('model.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
