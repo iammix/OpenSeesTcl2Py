@@ -305,7 +305,6 @@ class ConvertTcl2Py():
         tclFile.close()
         return element_zerolength_lines
 
-
 def write_file():
     project_path = Path(__file__).absolute().parent
     if os.path.exists(os.path.join(project_path, 'modelOpenSeesPy.py')):
