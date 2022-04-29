@@ -4,7 +4,6 @@ import shutil
 
 
 class ConvertTcl2Py():
-
     def __init__(self, tclFileName: str):
         self.tclFileName = tclFileName
         self.pyLines = []
@@ -43,7 +42,7 @@ class ConvertTcl2Py():
         y = []
         z = []
         for line in lines:
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x.append(float(line_list[2]))
@@ -74,7 +73,7 @@ class ConvertTcl2Py():
                 line = line[:-1]
             if line.endswith(';'):
                 line = line[:-1]
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x_fix.append(float(line_list[2]))
@@ -120,7 +119,7 @@ class ConvertTcl2Py():
                 line = line[:-1]
             if line.endswith(';'):
                 line = line[:-1]
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x_mass.append(float(line_list[2]))
@@ -372,10 +371,19 @@ def write_file():
     modelName = 'foulModel.tcl'
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.uniaxialMaterial_steel01()
+    lines = []
+
+    lines.append(convert.node())
+    lines.append(convert.fix())
+    lines.append(convert.mass())
+    lines.append(convert.uniaxialMaterial_steel01())
+
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
+        pythonFile.write('import openseespy.opensees as ops\n')
+        pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
-            pythonFile.write(line + '\n')
+            for item in line:
+                pythonFile.write(item + '\n')
     print('File Created . . .')
     pythonFile.close()
 
