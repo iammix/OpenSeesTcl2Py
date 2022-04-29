@@ -337,6 +337,31 @@ class ConvertTcl2Py():
         tclFile.close()
         return uniaxialMaterial_lines
 
+    def uniaxialMaterial_steel01(self):
+        lines = self._get_uniaxialMaterial_steel01_lines()
+        uniaxialMaterial_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            uniaxialMaterial_list.append(line_list)
+        self.uniaxialMaterial_steel01_lines = []
+        for i in range(len(uniaxialMaterial_list)):
+            self.uniaxialMaterial_steel01_lines.append(
+                f"ops.uniaxialMaterial('Steel01', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]}, {uniaxialMaterial_list[i][5]})"
+            )
+        return self.uniaxialMaterial_steel01_lines
+
+    def _get_uniaxialMaterial_steel01_lines(self) -> list:
+        uniaxialMaterial_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('uniaxialMaterial'):
+                    new_line = line.split(' ')
+                    if new_line[1] == 'Steel01':
+                        uniaxialMaterial_lines.append(line)
+        tclFile.close()
+        return uniaxialMaterial_lines
+
 
 def write_file():
     project_path = Path(__file__).absolute().parent
@@ -347,7 +372,7 @@ def write_file():
     modelName = 'foulModel.tcl'
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.uniaxialMaterial_elastic()
+    lines = convert.uniaxialMaterial_steel01()
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         for line in lines:
             pythonFile.write(line + '\n')
