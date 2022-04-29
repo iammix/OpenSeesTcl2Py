@@ -4,7 +4,6 @@ import shutil
 
 
 class ConvertTcl2Py():
-
     def __init__(self, tclFileName: str):
         self.tclFileName = tclFileName
         self.pyLines = []
@@ -43,7 +42,7 @@ class ConvertTcl2Py():
         y = []
         z = []
         for line in lines:
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x.append(float(line_list[2]))
@@ -74,7 +73,7 @@ class ConvertTcl2Py():
                 line = line[:-1]
             if line.endswith(';'):
                 line = line[:-1]
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x_fix.append(float(line_list[2]))
@@ -120,7 +119,7 @@ class ConvertTcl2Py():
                 line = line[:-1]
             if line.endswith(';'):
                 line = line[:-1]
-            line_list = line.split('\t')
+            line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x_mass.append(float(line_list[2]))
@@ -337,6 +336,57 @@ class ConvertTcl2Py():
         tclFile.close()
         return uniaxialMaterial_lines
 
+    def uniaxialMaterial_steel01(self):
+        lines = self._get_uniaxialMaterial_steel01_lines()
+        uniaxialMaterial_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            uniaxialMaterial_list.append(line_list)
+        self.uniaxialMaterial_steel01_lines = []
+        for i in range(len(uniaxialMaterial_list)):
+            self.uniaxialMaterial_steel01_lines.append(
+                f"ops.uniaxialMaterial('Steel01', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]}, {uniaxialMaterial_list[i][5]})"
+            )
+        return self.uniaxialMaterial_steel01_lines
+
+    def _get_uniaxialMaterial_steel01_lines(self) -> list:
+        uniaxialMaterial_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('uniaxialMaterial'):
+                    new_line = line.split(' ')
+                    if new_line[1] == 'Steel01':
+                        uniaxialMaterial_lines.append(line)
+        tclFile.close()
+        return uniaxialMaterial_lines
+
+    def recorders(self):
+        lines = self._get_recorders_lines()
+        recorder_list = []
+        for line in lines:
+            line_list = line.split(' ')
+            recorder_list.append(line_list)
+        self.recorder_Node_lines = []
+        for i in range(len(recorder_list)):
+            self.recorder_Node_lines.append(
+                f"ops.recorder('Node', '-time', '-file', {recorder_list[i][4]}, '-node', {recorder_list[i][6]}, '-dof', {recorder_list[i][8]}, {recorder_list[i][9]})"
+            )
+
+        return self.recorder_Node_lines
+
+    def _get_recorders_lines(self) -> list:
+        recorder_lines = []
+        with open(self.tclFileName, 'r') as tclFile:
+            tclLines = tclFile.readlines()
+            for line in tclLines:
+                if line.startswith('recorder'):
+                    new_line = line.split(' ')
+                    if new_line[1] == 'Node':
+                        recorder_lines.append(line)
+        tclFile.close()
+        return recorder_lines
+
 
 def write_file():
     project_path = Path(__file__).absolute().parent
@@ -347,10 +397,20 @@ def write_file():
     modelName = 'foulModel.tcl'
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
-    lines = convert.uniaxialMaterial_elastic()
+    lines = []
+
+    lines.append(convert.node())
+    lines.append(convert.fix())
+    lines.append(convert.mass())
+    lines.append(convert.uniaxialMaterial_steel01())
+    lines.append(convert.recorders())
+
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
+        pythonFile.write('import openseespy.opensees as ops\n')
+        pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
-            pythonFile.write(line + '\n')
+            for item in line:
+                pythonFile.write(item + '\n')
     print('File Created . . .')
     pythonFile.close()
 
