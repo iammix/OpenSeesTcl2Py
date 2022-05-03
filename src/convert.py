@@ -87,7 +87,7 @@ class ConvertTcl2Py():
         self.fix_lines = []
         for i in range(len(node_tag)):
             self.fix_lines.append(
-                f"ops.fix({node_tag[i]}, {x_fix[i]}, {y_fix[i]}, {z_fix[i]}, {xr_fix[i]}, {yr_fix[i]}, {zr_fix[i]})")
+                f"ops.fix({node_tag[i]}, {int(x_fix[i])}, {int(y_fix[i])}, {int(z_fix[i])}, {int(xr_fix[i])}, {int(yr_fix[i])}, {int(zr_fix[i])})")
         return self.fix_lines
 
     def _get_fix_lines(self) -> list:
@@ -399,12 +399,7 @@ def write_file():
     convert = ConvertTcl2Py(tclFileName)
     lines = []
 
-    lines.append(convert.node())
     lines.append(convert.fix())
-    lines.append(convert.mass())
-    lines.append(convert.uniaxialMaterial_steel01())
-    lines.append(convert.recorders())
-
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
         pythonFile.write('import openseespy.opensees as ops\n')
