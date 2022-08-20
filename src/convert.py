@@ -42,7 +42,12 @@ class ConvertTcl2Py():
         y = []
         z = []
         for line in lines:
-            line_list = line.split(' ')
+            line_list_space = line.split(' ')
+            line_list_tab = line.split('\t')
+            if len(line_list_space) > len(line_list_tab):
+                line_list = line_list_space
+            else:
+                line_list = line_list_tab
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
                 x.append(float(line_list[2]))
