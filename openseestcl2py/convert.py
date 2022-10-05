@@ -4,6 +4,7 @@ import shutil
 
 
 class ConvertTcl2Py():
+
     """
     Converts OpenSees models written in .tcl to .py!
     """
@@ -14,11 +15,13 @@ class ConvertTcl2Py():
         self.seperator = ' '  # space or tab
         self.modelType = ''
 
+
     def _get_lines(self) -> str:
         with open(self.tclFileName, 'r') as tclFile:
             tclLines = tclFile.readlines()
         tclFile.close()
         return tclLines
+
 
     # TODO: Convert it in protected method in class
     def get_model_type(self) -> str:
@@ -31,7 +34,6 @@ class ConvertTcl2Py():
                     self.modelType = '3D'
 
         print(self.modelType)
-
 
     def tcl2py(self):
         with open(self.tclFilename, 'r') as tclFile:
@@ -61,6 +63,7 @@ class ConvertTcl2Py():
         y = []
         z = []
         for line in lines:
+
             line_list_space = line.split(' ')
             line_list_tab = line.split('\t')
             if len(line_list_space) > len(line_list_tab):
