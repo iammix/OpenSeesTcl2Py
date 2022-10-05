@@ -426,7 +426,6 @@ def write_file():
     lines.append(convert.fix())
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
-        pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
             for item in line:
                 pythonFile.write(item + '\n')
