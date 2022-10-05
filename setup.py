@@ -22,5 +22,4 @@ setuptools.setup(
     package_dir={'': 'openseestcl2py'},
     packages=setuptools.find_packages(where='openseestcl2py'),
     python_requires='>=3.6',
-
 )
