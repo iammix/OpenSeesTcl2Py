@@ -4,7 +4,6 @@ import shutil
 
 
 class ConvertTcl2Py():
-
     """
     Converts OpenSees models written in .tcl to .py!
     """
@@ -15,13 +14,11 @@ class ConvertTcl2Py():
         self.seperator = ' '  # space or tab
         self.modelType = ''
 
-
     def _get_lines(self) -> str:
         with open(self.tclFileName, 'r') as tclFile:
             tclLines = tclFile.readlines()
         tclFile.close()
         return tclLines
-
 
     # TODO: Convert it in protected method in class
     def get_model_type(self) -> str:
