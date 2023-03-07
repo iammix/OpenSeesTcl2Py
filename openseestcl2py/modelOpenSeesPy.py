@@ -1,5 +1,4 @@
 import openseespy.opensees as ops
-import openseespy.opensees as ops
 ops.fix(8070, 1, 1, 1, 1, 1, 1)
 ops.fix(7860, 1, 1, 1, 1, 1, 1)
 ops.fix(788, 1, 1, 1, 1, 1, 1)
