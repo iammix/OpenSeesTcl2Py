@@ -395,7 +395,6 @@ def write_file():
         for line in lines:
             for item in line:
                 pythonFile.write(item + '\n')
-    print('File Created . . .')
     pythonFile.close()
 
 
