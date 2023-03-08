@@ -17,6 +17,26 @@ class ConvertTcl2Py:
         self.tcl_lines = self._get_lines()
         self.tcl_lines = self._remove_dollar_sign()
         self.tcl_lines = self._remove_semi_column()
+        self.tcl_lines = self._remove_sets()
+        self.tcl_lines = self._remove_right_parenthesis()
+
+    def _remove_expr(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('[expr', ''))
+        return lines
+
+    def _remove_right_parenthesis(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace(']', ''))
+        return lines
+
+    def _remove_sets(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('set', ''))
+        return lines
 
     def _remove_semi_column(self) -> List:
         lines = []
@@ -174,36 +194,6 @@ class ConvertTcl2Py:
             if line.startswith('mass'):
                 mass_lines.append(line)
         return mass_lines
-
-    def set_variables(self):
-        # TODO Handle expr in variable setter
-        #  labels: todo, enhancement
-        #  assignees: iammix
-
-        lines = self._get_set_lines()
-        variable_list = []
-        value_of_variable = []
-        for line in lines:
-            line_list = line.split(' ')
-            if len(line_list) > 1:
-                variable_list.append(line_list[1])
-                if line_list[2].endswith(';'):
-                    print(line_list[2])
-                    line_list[2] = line_list[2][:-1]
-                value_of_variable.append(line_list[2])
-            else:
-                pass
-        self.set_variables_lines = []
-        for i in range(len(variable_list)):
-            self.set_variables_lines.append(f"{variable_list[i]} = {value_of_variable[i]}")
-        return self.set_variables_lines
-
-    def _get_set_lines(self) -> List:
-        set_variable_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('set'):
-                set_variable_lines.append(line)
-        return set_variable_lines
 
     def section_Elastic(self):
         lines = self._get_section_elastic_lines()
@@ -387,6 +377,7 @@ def write_file():
     lines = []
 
     lines.append(convert.fix())
+    lines.append(convert.set_variables_lines)
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
