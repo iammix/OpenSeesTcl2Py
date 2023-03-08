@@ -16,11 +16,15 @@ class ConvertTcl2Py:
         self.modelType = self._get_model_type()
         self.tcl_lines = self._get_lines()
         self.tcl_lines = self._remove_dollar_sign()
-        print(self.tcl_lines)
+        self.tcl_lines = self._remove_semi_column()
 
+    def _remove_semi_column(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace(';', ''))
+        return lines
 
-
-    def _remove_dollar_sign(self):
+    def _remove_dollar_sign(self) -> List:
         lines = []
         for line in self.tcl_lines:
             lines.append(line.replace('$', ''))
@@ -229,9 +233,6 @@ class ConvertTcl2Py:
         return section_elastic_lines
 
     def geotransform(self):
-        # TODO [geotransform] remove $ from variable
-        # labels: todo, bug
-        # assignees: iammix
         lines = self._get_geotransform_lines()
         geotransform_list = []
         for line in lines:
@@ -308,9 +309,6 @@ class ConvertTcl2Py:
         return element_zerolength_lines
 
     def uniaxialMaterial_elastic(self):
-        # TODO [uniaxialMaterial_elastic] third argument is a ';'
-        #  labels: bug
-        #  assignees: iammix
         lines = self._get_uniaxialMaterial_elastic_lines()
         uniaxialMaterial_list = []
         for line in lines:
