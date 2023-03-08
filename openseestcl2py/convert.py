@@ -15,6 +15,16 @@ class ConvertTcl2Py:
         self.seperator = seperator  # space or tab
         self.modelType = self._get_model_type()
         self.tcl_lines = self._get_lines()
+        self.tcl_lines = self._remove_dollar_sign()
+        print(self.tcl_lines)
+
+
+
+    def _remove_dollar_sign(self):
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('$', ''))
+        return lines
 
     def _get_lines(self) -> List[str]:
         with open(self.tclFileName, 'r') as tclFile:
@@ -244,10 +254,6 @@ class ConvertTcl2Py:
         return geotransform_lines
 
     def element_nonlinearBeamColumn(self):
-        # TODO [element_nonlinearBeamColumn] remove $ from variables in ops.element
-        # labels: todo, bug
-        # assignees: iammix
-
         lines = self._get_element_nonlinearBeamColumn_lines()
         element_list = []
         for line in lines:
@@ -272,9 +278,6 @@ class ConvertTcl2Py:
         return element_nonlinearBeamColumn_lines
 
     def element_zerolength(self):
-        # TODO [element_zerolength] remove $ from variables in ops.element
-        # labels: todo, bug
-        # assignees: iammix
         lines = self._get_element_zerolength()
         element_list21 = []
         element_list19 = []
@@ -305,10 +308,6 @@ class ConvertTcl2Py:
         return element_zerolength_lines
 
     def uniaxialMaterial_elastic(self):
-        # TODO [uniaxialMaterial_elastic] remove $ from variables in ops.uniaxialMaterial
-        #  labels: todo
-        #  assignees: iammix
-
         # TODO [uniaxialMaterial_elastic] third argument is a ';'
         #  labels: bug
         #  assignees: iammix
