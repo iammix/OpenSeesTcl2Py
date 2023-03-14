@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import shutil
 from typing import List
+import utilities
 
 
 class ConvertTcl2Py:
@@ -104,9 +105,9 @@ class ConvertTcl2Py:
                 # labels: todo, bug
                 # assignees: iammix
                 node_tag.append(int(line_list[1]))
-                x.append(float(line_list[2]))
-                y.append(float(line_list[3]))
-                z.append(float(line_list[4]))
+                x.append(utilities.convert_to_number(line_list[2]))
+                y.append(utilities.convert_to_number(line_list[3]))
+                z.append(utilities.convert_to_number(line_list[4]))
             else:
                 pass
         self.node_lines = []
@@ -157,10 +158,6 @@ class ConvertTcl2Py:
         return fix_lines
 
     def mass(self):
-        # TODO Mass arguments split with space not tab
-        # labels: todo, enhancement
-        # assignees: iammix
-
         lines = self._get_mass_lines()
         node_tag = []
         x_mass = []
@@ -173,8 +170,7 @@ class ConvertTcl2Py:
         for line in lines:
             if line.endswith('\n'):
                 line = line[:-1]
-            if line.endswith(';'):
-                line = line[:-1]
+
             line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
@@ -185,7 +181,14 @@ class ConvertTcl2Py:
                 yr_mass.append(float(line_list[6]))
                 zr_mass.append(float(line_list[7]))
             else:
-                pass
+                line_list = line.split('\t')
+                node_tag.append(int(line_list[1]))
+                x_mass.append(float(line_list[2]))
+                y_mass.append(float(line_list[3]))
+                z_mass.append(float(line_list[4]))
+                xr_mass.append(float(line_list[5]))
+                yr_mass.append(float(line_list[6]))
+                zr_mass.append(float(line_list[7]))
         self.mass_lines = []
         for i in range(len(node_tag)):
             self.mass_lines.append(
@@ -380,7 +383,7 @@ def write_file():
     convert = ConvertTcl2Py(tclFileName)
     lines = []
 
-    lines.append(convert.node())
+    lines.append(convert.mass())
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
