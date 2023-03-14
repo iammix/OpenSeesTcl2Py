@@ -227,13 +227,11 @@ class ConvertTcl2Py:
         return section_elastic_lines
 
     def geotransform(self):
-        # TODO Leaves a \n at the end of the arguments
-        # labels: bug
-        # assignees: iammix
-
         lines = self._get_geotransform_lines()
         geotransform_list = []
         for line in lines:
+            if line.endswith('\n'):
+                line = line[:-1]
             line_list = line.split(' ')
             if len(line_list) > 1:
                 geotransform_list.append(line_list)
