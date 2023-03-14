@@ -228,6 +228,7 @@ class ConvertTcl2Py:
 
     def geotransform(self):
         lines = self._get_geotransform_lines()
+        lines = self._get_geotransform_lines()
         geotransform_list = []
         for line in lines:
             if line.endswith('\n'):
