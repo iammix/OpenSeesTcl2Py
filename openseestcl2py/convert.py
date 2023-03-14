@@ -101,9 +101,6 @@ class ConvertTcl2Py:
             else:
                 line_list = line_list_tab
             if len(line_list) > 1:
-                # TODO In case line_list have variables and NOT float or int
-                # labels: todo, bug
-                # assignees: iammix
                 node_tag.append(int(line_list[1]))
                 x.append(utilities.convert_to_number(line_list[2]))
                 y.append(utilities.convert_to_number(line_list[3]))
