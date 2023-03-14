@@ -230,6 +230,10 @@ class ConvertTcl2Py:
         return section_elastic_lines
 
     def geotransform(self):
+        # TODO Leaves a \n at the end of the arguments
+        # labels: bug
+        # assignees: iammix
+
         lines = self._get_geotransform_lines()
         geotransform_list = []
         for line in lines:
@@ -241,7 +245,7 @@ class ConvertTcl2Py:
         self.geotransform_lines = []
         for i in range(len(geotransform_list)):
             self.geotransform_lines.append(
-                f"ops.geotransform('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
+                f"ops.geomTransf('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
         return self.geotransform_lines
 
     def _get_geotransform_lines(self) -> List:
@@ -383,7 +387,7 @@ def write_file():
     convert = ConvertTcl2Py(tclFileName)
     lines = []
 
-    lines.append(convert.mass())
+    lines.append(convert.geotransform())
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
