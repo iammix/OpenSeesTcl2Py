@@ -21,6 +21,7 @@ class ConvertTcl2Py:
         self.tcl_lines = self._remove_sets()
         self.tcl_lines = self._remove_right_parenthesis()
 
+    # Protected Methods
     def _remove_expr(self) -> List:
         lines = []
         for line in self.tcl_lines:
@@ -67,16 +68,92 @@ class ConvertTcl2Py:
                     self.modelType = '3D'
         return self.modelType
 
-    def tcl2py(self):
-        with open(self.tclFilename, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-
     def _get_node_lines(self) -> list:
         node_lines = []
         for line in self.tcl_lines:
             if line.startswith('node'):
                 node_lines.append(line)
         return node_lines
+
+    def _get_fix_lines(self) -> List:
+        fix_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('fix'):
+                fix_lines.append(line)
+        return fix_lines
+
+    def _get_mass_lines(self) -> List:
+        mass_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('mass'):
+                mass_lines.append(line)
+        return mass_lines
+
+    def _get_section_elastic_lines(self) -> List:
+        section_elastic_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('section'):
+                line_split = line.split(' ')
+                if line_split[1] == 'Elastic':
+                    section_elastic_lines.append(line)
+        return section_elastic_lines
+
+    def _get_geotransform_lines(self) -> List:
+        geotransform_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('geomTransf'):
+                geotransform_lines.append(line)
+        return geotransform_lines
+
+    def _get_element_nonlinearBeamColumn_lines(self) -> List:
+        element_nonlinearBeamColumn_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'nonlinearBeamColumn':
+                    element_nonlinearBeamColumn_lines.append(line)
+        return element_nonlinearBeamColumn_lines
+
+    def _get_element_zerolength(self) -> List:
+        element_zerolength_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'zeroLength':
+                    element_zerolength_lines.append(line)
+        return element_zerolength_lines
+
+    def _get_uniaxialMaterial_elastic_lines(self) -> List:
+        uniaxialMaterial_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('uniaxialMaterial'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Elastic':
+                    uniaxialMaterial_lines.append(line)
+        return uniaxialMaterial_lines
+
+    def _get_uniaxialMaterial_steel01_lines(self) -> List:
+        uniaxialMaterial_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('uniaxialMaterial'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Steel01':
+                    uniaxialMaterial_lines.append(line)
+        return uniaxialMaterial_lines
+
+    def _get_recorders_lines(self) -> list:
+        recorder_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('recorder'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Node':
+                    recorder_lines.append(line)
+        return recorder_lines
+
+    # Public Methods
+    def tcl2py(self):
+        with open(self.tclFilename, 'r') as tclFile:
+            tclLines = tclFile.readlines()
 
     def node(self):
         # TODO The case that the line spit is different than tab.
@@ -147,13 +224,6 @@ class ConvertTcl2Py:
                 f"ops.fix({node_tag[i]}, {int(x_fix[i])}, {int(y_fix[i])}, {int(z_fix[i])}, {int(xr_fix[i])}, {int(yr_fix[i])}, {int(zr_fix[i])})")
         return self.fix_lines
 
-    def _get_fix_lines(self) -> List:
-        fix_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('fix'):
-                fix_lines.append(line)
-        return fix_lines
-
     def mass(self):
         lines = self._get_mass_lines()
         node_tag = []
@@ -192,13 +262,6 @@ class ConvertTcl2Py:
                 f"ops.mass({node_tag[i]}, {x_mass[i]}, {y_mass[i]}, {z_mass[i]}, {xr_mass[i]}, {yr_mass[i]}, {zr_mass[i]})")
         return self.mass_lines
 
-    def _get_mass_lines(self) -> List:
-        mass_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('mass'):
-                mass_lines.append(line)
-        return mass_lines
-
     def section_Elastic(self):
         lines = self._get_section_elastic_lines()
         section_list = []
@@ -216,15 +279,6 @@ class ConvertTcl2Py:
             self.section_elastic_lines.append(
                 f"ops.section('Elastic', {section_list[i][2]}, {section_list[i][3]}, {section_list[i][4]}, {section_list[i][5]}, {section_list[i][6]}, {section_list[i][7]}, {section_list[i][8]})")
         return self.section_elastic_lines
-
-    def _get_section_elastic_lines(self) -> List:
-        section_elastic_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('section'):
-                line_split = line.split(' ')
-                if line_split[1] == 'Elastic':
-                    section_elastic_lines.append(line)
-        return section_elastic_lines
 
     def geotransform(self):
         lines = self._get_geotransform_lines()
@@ -244,13 +298,6 @@ class ConvertTcl2Py:
                 f"ops.geomTransf('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
         return self.geotransform_lines
 
-    def _get_geotransform_lines(self) -> List:
-        geotransform_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('geomTransf'):
-                geotransform_lines.append(line)
-        return geotransform_lines
-
     def element_nonlinearBeamColumn(self):
         lines = self._get_element_nonlinearBeamColumn_lines()
         element_list = []
@@ -265,15 +312,6 @@ class ConvertTcl2Py:
             self.element_lines.append(
                 f"ops.element('nonlinearBeamColumn', {element_list[i][2]}, {element_list[i][3]}, {element_list[i][4]}, {element_list[i][5]}, {element_list[i][6]}, {element_list[i][7]})")
         return self.element_lines
-
-    def _get_element_nonlinearBeamColumn_lines(self) -> List:
-        element_nonlinearBeamColumn_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('element'):
-                new_line = line.split(' ')
-                if new_line[1] == 'nonlinearBeamColumn':
-                    element_nonlinearBeamColumn_lines.append(line)
-        return element_nonlinearBeamColumn_lines
 
     def element_zerolength(self):
         lines = self._get_element_zerolength()
@@ -296,15 +334,6 @@ class ConvertTcl2Py:
 
         return self.element_lines
 
-    def _get_element_zerolength(self) -> List:
-        element_zerolength_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('element'):
-                new_line = line.split(' ')
-                if new_line[1] == 'zeroLength':
-                    element_zerolength_lines.append(line)
-        return element_zerolength_lines
-
     def uniaxialMaterial_elastic(self):
         lines = self._get_uniaxialMaterial_elastic_lines()
         uniaxialMaterial_list = []
@@ -316,15 +345,6 @@ class ConvertTcl2Py:
             self.uniaxialMaterial_elastic_lines.append(
                 f"ops.uniaxialMaterial('Elastic', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]})")
         return self.uniaxialMaterial_elastic_lines
-
-    def _get_uniaxialMaterial_elastic_lines(self) -> List:
-        uniaxialMaterial_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('uniaxialMaterial'):
-                new_line = line.split(' ')
-                if new_line[1] == 'Elastic':
-                    uniaxialMaterial_lines.append(line)
-        return uniaxialMaterial_lines
 
     def uniaxialMaterial_steel01(self):
         lines = self._get_uniaxialMaterial_steel01_lines()
@@ -338,15 +358,6 @@ class ConvertTcl2Py:
                 f"ops.uniaxialMaterial('Steel01', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]}, {uniaxialMaterial_list[i][5]})"
             )
         return self.uniaxialMaterial_steel01_lines
-
-    def _get_uniaxialMaterial_steel01_lines(self) -> List:
-        uniaxialMaterial_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('uniaxialMaterial'):
-                new_line = line.split(' ')
-                if new_line[1] == 'Steel01':
-                    uniaxialMaterial_lines.append(line)
-        return uniaxialMaterial_lines
 
     def recorders(self):
         lines = self._get_recorders_lines()
@@ -362,14 +373,11 @@ class ConvertTcl2Py:
 
         return self.recorder_Node_lines
 
-    def _get_recorders_lines(self) -> list:
-        recorder_lines = []
-        for line in self.tcl_lines:
-            if line.startswith('recorder'):
-                new_line = line.split(' ')
-                if new_line[1] == 'Node':
-                    recorder_lines.append(line)
-        return recorder_lines
+    def beamWithHinges(self):
+        # TODO Convert Beam with hinges to forceBeamColumn Elements as the OpenSeesPy Documentation suggests
+        # labels: enhancement
+        # assignees: iammix
+        pass
 
 
 def write_file():
