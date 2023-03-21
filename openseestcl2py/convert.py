@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
 import shutil
+from typing import List
+import utilities
 
 
-class ConvertTcl2Py():
-
+class ConvertTcl2Py:
     """
     Converts OpenSees models written in .tcl to .py!
     """
@@ -12,19 +13,52 @@ class ConvertTcl2Py():
     def __init__(self, tclFileName: str, seperator: str = ' '):
         self.tclFileName = tclFileName
         self.pyLines = []
-        self.seperator = ' '  # space or tab
-        self.modelType = ''
+        self.seperator = seperator  # space or tab
+        self.modelType = self._get_model_type()
+        self.tcl_lines = self._get_lines()
+        self.tcl_lines = self._remove_dollar_sign()
+        self.tcl_lines = self._remove_semi_column()
+        self.tcl_lines = self._remove_sets()
+        self.tcl_lines = self._remove_right_parenthesis()
 
+    # Protected Methods
+    def _remove_expr(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('[expr', ''))
+        return lines
 
-    def _get_lines(self) -> str:
+    def _remove_right_parenthesis(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace(']', ''))
+        return lines
+
+    def _remove_sets(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('set', ''))
+        return lines
+
+    def _remove_semi_column(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace(';', ''))
+        return lines
+
+    def _remove_dollar_sign(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('$', ''))
+        return lines
+
+    def _get_lines(self) -> List[str]:
         with open(self.tclFileName, 'r') as tclFile:
             tclLines = tclFile.readlines()
         tclFile.close()
         return tclLines
 
-
-    # TODO: Convert it in protected method in class
-    def get_model_type(self) -> str:
+    def _get_model_type(self) -> str:
         lines = self._get_lines()
         for line in lines:
             if line.startswith('model'):
@@ -32,22 +66,94 @@ class ConvertTcl2Py():
                     self.modelType = '2D'
                 else:
                     self.modelType = '3D'
-
-        print(self.modelType)
-
-    def tcl2py(self):
-        with open(self.tclFilename, 'r') as tclFile:
-            tclLines = tclFile.readlines()
+        return self.modelType
 
     def _get_node_lines(self) -> list:
         node_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('node'):
-                    node_lines.append(line)
-        tclFile.close()
+        for line in self.tcl_lines:
+            if line.startswith('node'):
+                node_lines.append(line)
         return node_lines
+
+    def _get_fix_lines(self) -> List:
+        fix_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('fix'):
+                fix_lines.append(line)
+        return fix_lines
+
+    def _get_mass_lines(self) -> List:
+        mass_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('mass'):
+                mass_lines.append(line)
+        return mass_lines
+
+    def _get_section_elastic_lines(self) -> List:
+        section_elastic_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('section'):
+                line_split = line.split(' ')
+                if line_split[1] == 'Elastic':
+                    section_elastic_lines.append(line)
+        return section_elastic_lines
+
+    def _get_geotransform_lines(self) -> List:
+        geotransform_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('geomTransf'):
+                geotransform_lines.append(line)
+        return geotransform_lines
+
+    def _get_element_nonlinearBeamColumn_lines(self) -> List:
+        element_nonlinearBeamColumn_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'nonlinearBeamColumn':
+                    element_nonlinearBeamColumn_lines.append(line)
+        return element_nonlinearBeamColumn_lines
+
+    def _get_element_zerolength(self) -> List:
+        element_zerolength_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'zeroLength':
+                    element_zerolength_lines.append(line)
+        return element_zerolength_lines
+
+    def _get_uniaxialMaterial_elastic_lines(self) -> List:
+        uniaxialMaterial_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('uniaxialMaterial'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Elastic':
+                    uniaxialMaterial_lines.append(line)
+        return uniaxialMaterial_lines
+
+    def _get_uniaxialMaterial_steel01_lines(self) -> List:
+        uniaxialMaterial_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('uniaxialMaterial'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Steel01':
+                    uniaxialMaterial_lines.append(line)
+        return uniaxialMaterial_lines
+
+    def _get_recorders_lines(self) -> list:
+        recorder_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('recorder'):
+                new_line = line.split(' ')
+                if new_line[1] == 'Node':
+                    recorder_lines.append(line)
+        return recorder_lines
+
+    # Public Methods
+    def tcl2py(self):
+        with open(self.tclFilename, 'r') as tclFile:
+            tclLines = tclFile.readlines()
 
     def node(self):
         # TODO The case that the line spit is different than tab.
@@ -57,6 +163,7 @@ class ConvertTcl2Py():
         # TODO In case that the problem is 2D and not 3D.
         # labels: todo, enhancement
         # assignees: iammix
+
         lines = self._get_node_lines()
         node_tag = []
         x = []
@@ -72,9 +179,9 @@ class ConvertTcl2Py():
                 line_list = line_list_tab
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
-                x.append(float(line_list[2]))
-                y.append(float(line_list[3]))
-                z.append(float(line_list[4]))
+                x.append(utilities.convert_to_number(line_list[2]))
+                y.append(utilities.convert_to_number(line_list[3]))
+                z.append(utilities.convert_to_number(line_list[4]))
             else:
                 pass
         self.node_lines = []
@@ -117,21 +224,7 @@ class ConvertTcl2Py():
                 f"ops.fix({node_tag[i]}, {int(x_fix[i])}, {int(y_fix[i])}, {int(z_fix[i])}, {int(xr_fix[i])}, {int(yr_fix[i])}, {int(zr_fix[i])})")
         return self.fix_lines
 
-    def _get_fix_lines(self) -> list:
-        fix_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('fix'):
-                    fix_lines.append(line)
-        tclFile.close()
-        return fix_lines
-
     def mass(self):
-        # TODO Mass arguments split with space not tab
-        # labels: todo, enhancement
-        # assignees: iammix
-
         lines = self._get_mass_lines()
         node_tag = []
         x_mass = []
@@ -144,8 +237,7 @@ class ConvertTcl2Py():
         for line in lines:
             if line.endswith('\n'):
                 line = line[:-1]
-            if line.endswith(';'):
-                line = line[:-1]
+
             line_list = line.split(' ')
             if len(line_list) > 1:
                 node_tag.append(int(line_list[1]))
@@ -156,55 +248,19 @@ class ConvertTcl2Py():
                 yr_mass.append(float(line_list[6]))
                 zr_mass.append(float(line_list[7]))
             else:
-                pass
+                line_list = line.split('\t')
+                node_tag.append(int(line_list[1]))
+                x_mass.append(float(line_list[2]))
+                y_mass.append(float(line_list[3]))
+                z_mass.append(float(line_list[4]))
+                xr_mass.append(float(line_list[5]))
+                yr_mass.append(float(line_list[6]))
+                zr_mass.append(float(line_list[7]))
         self.mass_lines = []
         for i in range(len(node_tag)):
             self.mass_lines.append(
                 f"ops.mass({node_tag[i]}, {x_mass[i]}, {y_mass[i]}, {z_mass[i]}, {xr_mass[i]}, {yr_mass[i]}, {zr_mass[i]})")
         return self.mass_lines
-
-    def _get_mass_lines(self) -> list:
-        mass_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('mass'):
-                    mass_lines.append(line)
-        tclFile.close()
-        return mass_lines
-
-    def set_variables(self):
-        # TODO Handle expr in variable setter
-        #  labels: todo, enhancement
-        #  assignees: iammix
-
-        lines = self._get_set_lines()
-        variable_list = []
-        value_of_variable = []
-        for line in lines:
-            line_list = line.split(' ')
-            if len(line_list) > 1:
-                variable_list.append(line_list[1])
-                if line_list[2].endswith(';'):
-                    print(line_list[2])
-                    line_list[2] = line_list[2][:-1]
-                value_of_variable.append(line_list[2])
-            else:
-                pass
-        self.set_variables_lines = []
-        for i in range(len(variable_list)):
-            self.set_variables_lines.append(f"{variable_list[i]} = {value_of_variable[i]}")
-        return self.set_variables_lines
-
-    def _get_set_lines(self) -> list:
-        set_variable_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('set'):
-                    set_variable_lines.append(line)
-        tclFile.close()
-        return set_variable_lines
 
     def section_Elastic(self):
         lines = self._get_section_elastic_lines()
@@ -224,25 +280,13 @@ class ConvertTcl2Py():
                 f"ops.section('Elastic', {section_list[i][2]}, {section_list[i][3]}, {section_list[i][4]}, {section_list[i][5]}, {section_list[i][6]}, {section_list[i][7]}, {section_list[i][8]})")
         return self.section_elastic_lines
 
-    def _get_section_elastic_lines(self) -> list:
-        section_elastic_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('section'):
-                    line_split = line.split(' ')
-                    if line_split[1] == 'Elastic':
-                        section_elastic_lines.append(line)
-        tclFile.close()
-        return section_elastic_lines
-
     def geotransform(self):
-        # TODO [geotransform] remove $ from variable
-        # labels: todo, bug
-        # assignees: iammix
+        lines = self._get_geotransform_lines()
         lines = self._get_geotransform_lines()
         geotransform_list = []
         for line in lines:
+            if line.endswith('\n'):
+                line = line[:-1]
             line_list = line.split(' ')
             if len(line_list) > 1:
                 geotransform_list.append(line_list)
@@ -251,24 +295,10 @@ class ConvertTcl2Py():
         self.geotransform_lines = []
         for i in range(len(geotransform_list)):
             self.geotransform_lines.append(
-                f"ops.geotransform('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
+                f"ops.geomTransf('{geotransform_list[i][1]}', {geotransform_list[i][2]}, {geotransform_list[i][3]}, {geotransform_list[i][4]}, {geotransform_list[i][5]})")
         return self.geotransform_lines
 
-    def _get_geotransform_lines(self) -> list:
-        geotransform_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('geomTransf'):
-                    geotransform_lines.append(line)
-        tclFile.close()
-        return geotransform_lines
-
     def element_nonlinearBeamColumn(self):
-        # TODO [element_nonlinearBeamColumn] remove $ from variables in ops.element
-        # labels: todo, bug
-        # assignees: iammix
-
         lines = self._get_element_nonlinearBeamColumn_lines()
         element_list = []
         for line in lines:
@@ -283,22 +313,7 @@ class ConvertTcl2Py():
                 f"ops.element('nonlinearBeamColumn', {element_list[i][2]}, {element_list[i][3]}, {element_list[i][4]}, {element_list[i][5]}, {element_list[i][6]}, {element_list[i][7]})")
         return self.element_lines
 
-    def _get_element_nonlinearBeamColumn_lines(self) -> list:
-        element_nonlinearBeamColumn_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('element'):
-                    new_line = line.split(' ')
-                    if new_line[1] == 'nonlinearBeamColumn':
-                        element_nonlinearBeamColumn_lines.append(line)
-        tclFile.close()
-        return element_nonlinearBeamColumn_lines
-
     def element_zerolength(self):
-        # TODO [element_zerolength] remove $ from variables in ops.element
-        # labels: todo, bug
-        # assignees: iammix
         lines = self._get_element_zerolength()
         element_list21 = []
         element_list19 = []
@@ -319,26 +334,7 @@ class ConvertTcl2Py():
 
         return self.element_lines
 
-    def _get_element_zerolength(self) -> list:
-        element_zerolength_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('element'):
-                    new_line = line.split(' ')
-                    if new_line[1] == 'zeroLength':
-                        element_zerolength_lines.append(line)
-        tclFile.close()
-        return element_zerolength_lines
-
     def uniaxialMaterial_elastic(self):
-        # TODO [uniaxialMaterial_elastic] remove $ from variables in ops.uniaxialMaterial
-        #  labels: todo
-        #  assignees: iammix
-
-        # TODO [uniaxialMaterial_elastic] third argument is a ';'
-        #  labels: bug
-        #  assignees: iammix
         lines = self._get_uniaxialMaterial_elastic_lines()
         uniaxialMaterial_list = []
         for line in lines:
@@ -349,19 +345,6 @@ class ConvertTcl2Py():
             self.uniaxialMaterial_elastic_lines.append(
                 f"ops.uniaxialMaterial('Elastic', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]})")
         return self.uniaxialMaterial_elastic_lines
-
-    def _get_uniaxialMaterial_elastic_lines(self) -> list:
-        uniaxialMaterial_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('uniaxialMaterial'):
-                    new_line = line.split(' ')
-                    if new_line[1] == 'Elastic':
-                        uniaxialMaterial_lines.append(line)
-
-        tclFile.close()
-        return uniaxialMaterial_lines
 
     def uniaxialMaterial_steel01(self):
         lines = self._get_uniaxialMaterial_steel01_lines()
@@ -375,18 +358,6 @@ class ConvertTcl2Py():
                 f"ops.uniaxialMaterial('Steel01', {uniaxialMaterial_list[i][2]}, {uniaxialMaterial_list[i][3]}, {uniaxialMaterial_list[i][4]}, {uniaxialMaterial_list[i][5]})"
             )
         return self.uniaxialMaterial_steel01_lines
-
-    def _get_uniaxialMaterial_steel01_lines(self) -> list:
-        uniaxialMaterial_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('uniaxialMaterial'):
-                    new_line = line.split(' ')
-                    if new_line[1] == 'Steel01':
-                        uniaxialMaterial_lines.append(line)
-        tclFile.close()
-        return uniaxialMaterial_lines
 
     def recorders(self):
         lines = self._get_recorders_lines()
@@ -402,37 +373,30 @@ class ConvertTcl2Py():
 
         return self.recorder_Node_lines
 
-    def _get_recorders_lines(self) -> list:
-        recorder_lines = []
-        with open(self.tclFileName, 'r') as tclFile:
-            tclLines = tclFile.readlines()
-            for line in tclLines:
-                if line.startswith('recorder'):
-                    new_line = line.split(' ')
-                    if new_line[1] == 'Node':
-                        recorder_lines.append(line)
-        tclFile.close()
-        return recorder_lines
+    def beamWithHinges(self):
+        # TODO Convert Beam with hinges to forceBeamColumn Elements as the OpenSeesPy Documentation suggests
+        # labels: enhancement
+        # assignees: iammix
+        pass
 
 
 def write_file():
     project_path = Path(__file__).absolute().parent
-    if os.path.exists(os.path.join(project_path, 'modelOpenSeesPy.py')):
-        os.remove(os.path.join(project_path, 'modelOpenSeesPy.py'))
+    if os.path.exists(os.path.join(project_path, 'bridge_model.py')):
+        os.remove(os.path.join(project_path, 'bridge_model.py'))
         print('File Deleted . . .')
 
-    modelName = 'foulModel.tcl'
+    modelName = 'bridge_model.tcl'
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
     lines = []
 
-    lines.append(convert.fix())
+    lines.append(convert.geotransform())
     with open('modelOpenSeesPy.py', 'w') as pythonFile:
         pythonFile.write('import openseespy.opensees as ops\n')
         for line in lines:
             for item in line:
                 pythonFile.write(item + '\n')
-    print('File Created . . .')
     pythonFile.close()
 
 
