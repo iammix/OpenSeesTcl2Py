@@ -10,18 +10,23 @@ class ConvertTcl2Py:
     Converts OpenSees models written in .tcl to .py!
     """
 
-    def __init__(self, tclFileName: str, seperator: str = ' '):
+    def __init__(self, tclFileName: str):
         self.tclFileName = tclFileName
         self.pyLines = []
-        self.seperator = seperator  # space or tab
         self.modelType = self._get_model_type()
         self.tcl_lines = self._get_lines()
-        self.tcl_lines = self._remove_dollar_sign()
-        self.tcl_lines = self._remove_semi_column()
-        self.tcl_lines = self._remove_sets()
-        self.tcl_lines = self._remove_right_parenthesis()
+        # self.tcl_lines = self._remove_dollar_sign()
+        # self.tcl_lines = self._remove_semi_column()
+        # self.tcl_lines = self._remove_sets()
+        # self.tcl_lines = self._remove_right_parenthesis()
 
     # Protected Methods
+    def remove_tabs(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('\t', ' '))
+        return lines
+
     def _remove_expr(self) -> List:
         lines = []
         for line in self.tcl_lines:
@@ -60,6 +65,7 @@ class ConvertTcl2Py:
 
     def _get_model_type(self) -> str:
         lines = self._get_lines()
+        self.modelType = None
         for line in lines:
             if line.startswith('model'):
                 if line.split(self.seperator)[3] == '2':
@@ -113,6 +119,17 @@ class ConvertTcl2Py:
                 if new_line[1] == 'nonlinearBeamColumn':
                     element_nonlinearBeamColumn_lines.append(line)
         return element_nonlinearBeamColumn_lines
+
+    def _get_element_beamWithHinges_lines(self) -> List:
+        # TODO Seperator is a tab and not a space
+        #
+        element_beamWithHinges_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'beamWithHinges':
+                    element_beamWithHinges_lines.append(line)
+        return element_beamWithHinges_lines
 
     def _get_element_zerolength(self) -> List:
         element_zerolength_lines = []
@@ -400,5 +417,16 @@ def write_file():
     pythonFile.close()
 
 
+def dev():
+    filePath = r'A:\Projects\OpenSeesTcl2Py\openseestcl2py\example_file.txt'
+
+    with open(filePath, 'r') as file:
+        lines = file.readlines()
+    file.close()
+    stringLines = [line.split(' ') for line in lines]
+    stringLines.removeall('')
+    x=1
+
+
 if __name__ == "__main__":
-    write_file()
+    dev()
