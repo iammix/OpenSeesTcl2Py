@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "OpenSeesTcl2Py_iammix"
+name = "OpenSeesTcl2Py"
 version = "0.0.1"
 authors = [
     { name ="Konstantinos Mixios", email="k.mixios@gmail.com"},

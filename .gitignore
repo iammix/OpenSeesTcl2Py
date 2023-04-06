@@ -1,3 +1,4 @@
 .idea/
 src/openseestcl2py/__pycache__/
 venv/
+dist/
