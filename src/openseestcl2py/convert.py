@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import shutil
 from typing import List
 import utilities
 
@@ -10,18 +9,23 @@ class ConvertTcl2Py:
     Converts OpenSees models written in .tcl to .py!
     """
 
-    def __init__(self, tclFileName: str, seperator: str = ' '):
+    def __init__(self, tclFileName: str):
         self.tclFileName = tclFileName
         self.pyLines = []
-        self.seperator = seperator  # space or tab
         self.modelType = self._get_model_type()
         self.tcl_lines = self._get_lines()
-        self.tcl_lines = self._remove_dollar_sign()
-        self.tcl_lines = self._remove_semi_column()
-        self.tcl_lines = self._remove_sets()
-        self.tcl_lines = self._remove_right_parenthesis()
+        # self.tcl_lines = self._remove_dollar_sign()
+        # self.tcl_lines = self._remove_semi_column()
+        # self.tcl_lines = self._remove_sets()
+        # self.tcl_lines = self._remove_right_parenthesis()
 
     # Protected Methods
+    def _remove_tabs(self) -> List:
+        lines = []
+        for line in self.tcl_lines:
+            lines.append(line.replace('\t', ' '))
+        return lines
+
     def _remove_expr(self) -> List:
         lines = []
         for line in self.tcl_lines:
@@ -60,6 +64,7 @@ class ConvertTcl2Py:
 
     def _get_model_type(self) -> str:
         lines = self._get_lines()
+        self.modelType = None
         for line in lines:
             if line.startswith('model'):
                 if line.split(self.seperator)[3] == '2':
@@ -113,6 +118,17 @@ class ConvertTcl2Py:
                 if new_line[1] == 'nonlinearBeamColumn':
                     element_nonlinearBeamColumn_lines.append(line)
         return element_nonlinearBeamColumn_lines
+
+    def _get_element_beamWithHinges_lines(self) -> List:
+        # TODO Seperator is a tab and not a space
+        #
+        element_beamWithHinges_lines = []
+        for line in self.tcl_lines:
+            if line.startswith('element'):
+                new_line = line.split(' ')
+                if new_line[1] == 'beamWithHinges':
+                    element_beamWithHinges_lines.append(line)
+        return element_beamWithHinges_lines
 
     def _get_element_zerolength(self) -> List:
         element_zerolength_lines = []
@@ -380,13 +396,13 @@ class ConvertTcl2Py:
         pass
 
 
-def write_file():
+def write_file(tclFilePath:str):
     project_path = Path(__file__).absolute().parent
     if os.path.exists(os.path.join(project_path, 'bridge_model.py')):
         os.remove(os.path.join(project_path, 'bridge_model.py'))
         print('File Deleted . . .')
 
-    modelName = 'bridge_model.tcl'
+    modelName = tclFilePath
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
     lines = []
@@ -398,7 +414,3 @@ def write_file():
             for item in line:
                 pythonFile.write(item + '\n')
     pythonFile.close()
-
-
-if __name__ == "__main__":
-    write_file()

@@ -1,9 +1,0 @@
-section Elastic $secTagDECKSPAN $Edeck $ADSpan $IzDSpan $IyDSpan $Gdeck $JDSpan ;
-section Elastic $secTagDECKSUPPORT $Edeck $ADSupport $IzDSupport $IyDSupport $Gdeck $JDSupport ;
-section Elastic $secTagABUTMENT $Eth $Aabtm $Izabtm $Iyabtm $Gdeck $Jabtm ;
-section Elastic $secTagDOKOSEDRASHS $Edeck $Adokedr $Izdokedr $Iydokedr $Gdeck $Jdokedr ;
-section Elastic $secTagSYNDDOKOS $Edeck $Asynddok $Izsynddok $Iysynddok $Gdeck $Jsynddok ;
-section Elastic $secTagKEFALODESMOS $Eth $Akefalod $Izkefalod $Iykefalod $Gdeck $Jkefalod ;
-section Elastic $secTagTHWRAKIO $Eth $Athwrakio $Izthwrakio $Iythwrakio $Gdeck $Jthwrakio ;
-section Elastic $secTagPILES $Eth $Apiles $Izpiles $Iypiles $Gdeck $Jpiles ;
-section Elastic $secTagRIGID $Eth $ARIGID $IzRIGID $IyRIGID $Gdeck $JRIGID ;
