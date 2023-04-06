@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import shutil
 from typing import List
 import utilities
 
@@ -21,7 +20,7 @@ class ConvertTcl2Py:
         # self.tcl_lines = self._remove_right_parenthesis()
 
     # Protected Methods
-    def remove_tabs(self) -> List:
+    def _remove_tabs(self) -> List:
         lines = []
         for line in self.tcl_lines:
             lines.append(line.replace('\t', ' '))
@@ -397,13 +396,13 @@ class ConvertTcl2Py:
         pass
 
 
-def write_file():
+def write_file(tclFilePath:str):
     project_path = Path(__file__).absolute().parent
     if os.path.exists(os.path.join(project_path, 'bridge_model.py')):
         os.remove(os.path.join(project_path, 'bridge_model.py'))
         print('File Deleted . . .')
 
-    modelName = 'bridge_model.tcl'
+    modelName = tclFilePath
     tclFileName = os.path.join(project_path, modelName)
     convert = ConvertTcl2Py(tclFileName)
     lines = []
@@ -415,18 +414,3 @@ def write_file():
             for item in line:
                 pythonFile.write(item + '\n')
     pythonFile.close()
-
-
-def dev():
-    filePath = r'A:\Projects\OpenSeesTcl2Py\openseestcl2py\example_file.txt'
-
-    with open(filePath, 'r') as file:
-        lines = file.readlines()
-    file.close()
-    stringLines = [line.split(' ') for line in lines]
-    stringLines.removeall('')
-    x=1
-
-
-if __name__ == "__main__":
-    dev()
